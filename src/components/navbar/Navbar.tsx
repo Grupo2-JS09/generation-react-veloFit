@@ -1,7 +1,7 @@
 function Navbar() {
   return (
     <>
-      <nav className="bg-[#2c302e] py-4 px-8">
+      <nav className="bg-(--jet) py-4 px-8">
         <div className="container mx-auto flex justify-between items-center">
           <div className="logo-veloFit flex items-center gap-2">
             <span className="text-white text-2xl font-bold">VeloFit</span>
@@ -11,37 +11,37 @@ function Navbar() {
             <li>
               <a
                 href=""
-                className="text-white text-base font-medium hover:text-[#9ae19d] transition-colors duration-300 relative group"
+                className="text-white text-base font-medium hover:text-(--celadon) transition-colors duration-300 relative group"
               >
                 Home
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[#9ae19d] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-(--celadon) group-hover:w-full transition-all duration-300"></span>
               </a>
             </li>
             <li>
               <a
                 href=""
-                className="text-white text-base font-medium hover:text-[#9ae19d] transition-colors duration-300 relative group"
+                className="text-white text-base font-medium hover:text-(--celadon) transition-colors duration-300 relative group"
               >
                 Serviços
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[#9ae19d] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-(--celadon) group-hover:w-full transition-all duration-300"></span>
               </a>
             </li>
             <li>
               <a
                 href="#sobre"
-                className="text-white text-base font-medium hover:text-[#9ae19d] transition-colors duration-300 relative group"
+                className="text-white text-base font-medium hover:text-(--celadon) transition-colors duration-300 relative group"
               >
                 Sobre
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[#9ae19d] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-(--celadon) group-hover:w-full transition-all duration-300"></span>
               </a>
             </li>
             <li>
               <a
                 href=""
-                className="text-white text-base font-medium hover:text-[#9ae19d] transition-colors duration-300 relative group"
+                className="text-white text-base font-medium hover:text-(--celadon) transition-colors duration-300 relative group"
               >
                 Contato
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[#9ae19d] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-(--celadon) group-hover:w-full transition-all duration-300"></span>
               </a>
             </li>
           </ul>
