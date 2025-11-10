@@ -8,12 +8,14 @@ import FormServico from "./components/servico/formservico/FormServico";
 import ListaServico from "./components/servico/listaservico/ListaServico";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Navbar from "./components/navbar/Navbar";
 
-function App() {
+export function App() {
   return (
     <>
       <BrowserRouter>
-        <div className="min-h-[80vh]">
+        <Navbar />
+        <div className='min-h-[80vh]'>
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
