@@ -1,5 +1,5 @@
 import img1 from "../assets/imagenscaroussel/esteira.jpg";
-import img2 from "../assets/imagenscaroussel/pilates.jpg";
+import img2 from "../assets/imagenscaroussel/img3.jpg";
 import img3 from "../assets/imagenscaroussel/tenis.jpg";
 import MyCaroussel from "../components/mycaroussel/MyCaroussel";
 export default function Home() {
@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <>
       <div className=" w-full  min-h-screen grid lg:grid-cols-2 md:grid-cols-2 bg-linear-to-r from-[#2b302e] via-[#3d5041] to-[#527859] ">
-        <div className="border-2 flex flex-col w-full justify-center items-center  ">
+        <div className=" flex flex-col w-full justify-center items-center  ">
           <div className="w-1/2 flex flex-col gap-10">
             <div className="flex flex-col gap-6">
-              <h1 className="text-4xl text-white font-bold ">
+              <h1 className="text-7xl text-white font-bold ">
                 Torne Seu Corpo Com a{" "}
                 <span className="text-(--tomato)">VeloFIT</span>
               </h1>
@@ -30,7 +30,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className=" flex border-2 w-full h-full items-center ">
+        <div className=" flex  w-full h-full items-center p-4">
           <MyCaroussel items={images} />
         </div>
       </div>

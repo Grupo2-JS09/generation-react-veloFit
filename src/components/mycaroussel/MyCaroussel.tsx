@@ -26,7 +26,7 @@ const MyCaroussel: React.FC<CarouselProps> = ({ items }) => {
           <img
             src={url}
             alt={`Slide ${index + 1}`}
-            className="w-full  object-cover rounded-2xl"
+            className="w-full h-full  object-cover rounded-2xl"
           />
         </SwiperSlide>
       ))}
