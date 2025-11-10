@@ -14,10 +14,10 @@ export default function Home() {
           </div>
           <div>
             <Button
-              width="w-1"
               color="bg-[#527859]"
               textColor="white"
               textValue="Teste 2"
+              borderColor="border-amber-200"
             />
           </div>
         </div>

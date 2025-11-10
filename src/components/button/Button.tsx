@@ -1,20 +1,22 @@
 interface buttonProps {
   color: string;
-  width: string;
   textColor: string;
   textValue: string;
-  borderColor:string;
-  
+  borderColor: string;
 }
 
 export default function Button({
   color,
-  width,
+
   textColor,
   textValue,
-  
+  borderColor,
 }: buttonProps) {
   return (
-    <button className={`${color} ${width} ${textColor} ${}`}>{textValue}</button>
+    <button
+      className={`${color} ${textColor} ${borderColor} border text-center py `}
+    >
+      {textValue}
+    </button>
   );
 }
