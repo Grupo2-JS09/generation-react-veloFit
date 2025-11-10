@@ -1,18 +1,10 @@
-import "./App.css";
+import React from "react";
+import Cadastro from "./pages/Cadastro";
 
 function App() {
-  // const [count, setCount] = useState(0);
-  // return (
-  //   <>
-  //     <Navbar />
-  //     <div className="min-h-[80vh]">
-  //       <Routes>
-  //         <Route path="/home" element={<Home />} />
-  //       </Routes>
-  //     </div>
-  //     <Footer />
-  //   </>
-  // );
+  return (
+   
+  );
 }
 
 export default App;
