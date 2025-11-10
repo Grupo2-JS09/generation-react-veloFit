@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// Definição de cores customizadas para Tailwind CSS (simuladas aqui, mas o usuário deve ter no seu setup)
+// --jet: #1e293b (slate-800)
+// --tomato: #ff6347 (orange-500)
 
 export default function Cadastro() {
   const [nome, setNome] = useState("");
@@ -8,6 +13,16 @@ export default function Cadastro() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erros, setErros] = useState<Record<string, string>>({});
   const [sucesso, setSucesso] = useState<string | null>(null);
+
+  // Impede scroll da página (mantido conforme solicitado)
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, []);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -62,34 +77,44 @@ export default function Cadastro() {
 
   return (
     <div
-      className="min-h-screen w-full flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 via-emerald-900/40 to-gray-900 relative overflow-hidden"
+      className="min-h-screen w-full flex flex-col bg-gradient-to-br from-gray-900 via-emerald-900/40 to-gray-900 relative overflow-hidden"
       style={{ backgroundColor: "#0f172a" }}
     >
       {/* Fundos visuais */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,140,0,0.15),_transparent_60%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(16,185,129,0.15),_transparent_60%)]"></div>
 
-      <div className="relative flex flex-col lg:flex-row w-full backdrop-blur-[2px]">
-        {/* LADO ESQUERDO */}
-        <div className="flex flex-col justify-center w-full lg:w-1/2 px-8 sm:px-12 md:px-16 lg:px-24 py-12 lg:py-24 text-white text-center lg:text-left">
-          <div className="flex items-center justify-center lg:justify-start gap-4 mb-10">
-            <div className="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
-              <span className="text-4xl font-bold">V</span>
-            </div>
-            <span className="text-4xl font-bold">VeloFit</span>
+      {/* Container principal com ajuste para garantir que o conteúdo não ultrapasse a tela */}
+      <div className="relative flex flex-col lg:flex-row w-full backdrop-blur-[2px] flex-grow">
+        {/* LADO ESQUERDO - Informações */}
+        {/* Adicionado 'py-10' para padding vertical e 'flex-shrink-0' para evitar que encolha */}
+        <div className="flex flex-col justify-center w-full lg:w-1/2 px-6 sm:px-8 md:px-12 lg:px-16 py-10 text-white text-center lg:text-left flex-shrink-0">
+          <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+         <div
+  className="w-24 h-24 rounded-xl flex items-center justify-center shadow-lg shadow-[var(--tomato)/20]"
+  style={{ backgroundColor: "var(--tomato)" }}
+>
+  <img
+    src="https://i.imgur.com/H6qOppX.png"
+    alt="VeloFit Logo"
+    className="w-16 h-16 object-contain"
+  />
+</div>
+
+            <span className="text-3xl font-bold">VeloFit</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight tracking-tight">
             Transforme seu corpo com{" "}
-            <span className="text-orange-500">VeloFit</span>
+<span style={{ color: "var(--tomato)" }}>VeloFit</span>
           </h1>
 
-          <p className="text-gray-300 text-lg sm:text-xl md:text-2xl mb-12 lg:mb-16 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             Sistema completo de gestão para academias. Cadastre serviços,
             gerencie membros e impulsione seu negócio fitness.
           </p>
 
-          <div className="space-y-8 sm:space-y-10">
+          <div className="space-y-6 sm:space-y-8">
             <Feature
               icon="📊"
               title="Acompanhe Seu Progresso"
@@ -108,13 +133,14 @@ export default function Cadastro() {
           </div>
         </div>
 
-        {/* LADO DIREITO */}
-        <div className="flex w-full lg:w-1/2 items-center justify-center p-6 sm:p-10 md:p-12">
-          <div className="w-full max-w-md sm:max-w-lg bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-8 sm:p-10 md:p-12 rounded-3xl shadow-2xl">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">
+        {/* LADO DIREITO - Formulário */}
+        {/* Adicionado 'flex-grow' para ocupar o espaço restante e 'py-10' para padding vertical */}
+        <div className="flex w-full lg:w-1/2 items-center justify-center py-10 px-6 sm:px-8 md:px-10 lg:px-12 flex-grow">
+          <div className="w-full max-w-md bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-6 sm:p-8 rounded-3xl shadow-2xl">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
               Criar Conta
             </h2>
-            <p className="text-gray-400 mb-8 sm:mb-10 text-lg sm:text-xl">
+            <p className="text-gray-400 mb-6 text-base sm:text-lg">
               Junte-se à comunidade VeloFit
             </p>
 
@@ -159,14 +185,14 @@ export default function Cadastro() {
               />
 
               {sucesso && (
-                <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-4">
-                  <p className="text-green-400 text-lg">{sucesso}</p>
+                <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-3">
+                  <p className="text-green-400 text-base">{sucesso}</p>
                 </div>
               )}
 
               <button
                 type="submit"
-                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-lg sm:text-xl py-3.5 sm:py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20"
+                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-lg py-3 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20"
               >
                 Cadastrar
               </button>
@@ -182,21 +208,29 @@ export default function Cadastro() {
                   setErros({});
                   setSucesso(null);
                 }}
-                className="w-full border border-gray-600 hover:bg-gray-700/50 text-gray-300 font-medium text-base sm:text-lg py-3 rounded-xl transition duration-200"
+                className="w-full border border-gray-600 hover:bg-gray-700/50 text-gray-300 font-medium text-base py-3 rounded-xl transition duration-200"
               >
                 Limpar Formulário
               </button>
 
-              <p className="text-center text-gray-400 text-base sm:text-lg mt-6">
+              <p className="text-center text-gray-400 text-sm sm:text-base mt-4">
                 Já tem uma conta?{" "}
-                <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
-                  Fazer Login
-                </span>
+                <Link to="/login">
+                  <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
+                    Fazer Login
+                  </span>
+                </Link>
               </p>
             </form>
           </div>
         </div>
       </div>
+      
+      {/* Footer (Simulado) */}
+      {/* Adicionado 'flex-shrink-0' e 'py-4' para um pequeno espaçamento no final */}
+      <footer className="w-full text-center text-gray-500 text-xs py-4 flex-shrink-0">
+        © {new Date().getFullYear()} VeloFit. Todos os direitos reservados.
+      </footer>
     </div>
   );
 }
@@ -204,35 +238,38 @@ export default function Cadastro() {
 function Input({ label, value, onChange, placeholder, type = "text", erro }: any) {
   return (
     <div>
-      <label className="text-gray-300 text-base sm:text-lg font-medium mb-2 block">
+      <label className="text-gray-300 text-sm sm:text-base font-medium mb-2 block">
         {label}
       </label>
       <input
         type={type}
-        className={`w-full bg-gray-900/50 border ${
-          erro ? "border-red-500" : "border-gray-600"
-        } rounded-xl p-3 sm:p-4 text-white text-base sm:text-lg placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition`}
+       className={`w-full bg-[var(--jet)/50] border ${
+  erro ? "border-red-500" : "border-[var(--ferngreen)]"
+        } rounded-xl p-3 text-white text-sm sm:text-base placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition`}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      {erro && <p className="text-red-400 text-sm mt-2">{erro}</p>}
+      <div className="min-h-[20px] mt-1">
+        {erro && <p className="text-red-400 text-xs">{erro}</p>}
+      </div>
     </div>
   );
 }
 
 function Feature({ icon, title, text }: any) {
   return (
-    <div className="flex items-start gap-4 sm:gap-5">
-      <div className="w-10 h-10 sm:w-11 sm:h-11 bg-orange-500/20 rounded-full flex items-center justify-center mt-1">
-        <span className="text-orange-500 text-xl sm:text-2xl">{icon}</span>
+    <div className="flex items-start gap-6"> {/* gap maior entre ícone e texto */}
+      <div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mt-1">
+        <span style={{ color: "var(--tomato)" }} className="text-4xl">{icon}</span>
       </div>
       <div>
-        <h3 className="font-semibold text-lg sm:text-2xl mb-2">{title}</h3>
-        <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
+        <h3 className="font-semibold text-xl sm:text-2xl mb-3">{title}</h3>
+        <p className="text-gray-300 text-lg sm:text-xl leading-relaxed">
           {text}
         </p>
       </div>
     </div>
   );
 }
+
