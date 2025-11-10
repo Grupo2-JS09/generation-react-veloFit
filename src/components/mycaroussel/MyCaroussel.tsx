@@ -19,14 +19,14 @@ const MyCaroussel: React.FC<CarouselProps> = ({ items }) => {
       navigation
       pagination={{ clickable: true }}
       loop={true}
-      className="max-w-xl h-1/2 rounded-2xl" // Exemplo de classe Tailwind
+      className="max-w-xl h-1/2" // Exemplo de classe Tailwind
     >
       {items.map((url, index) => (
         <SwiperSlide key={index}>
           <img
             src={url}
             alt={`Slide ${index + 1}`}
-            className="w-full h-auto object-cover"
+            className="w-full  object-cover rounded-2xl"
           />
         </SwiperSlide>
       ))}
