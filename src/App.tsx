@@ -18,21 +18,21 @@ export function App() {
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
-          <div className='min-h-[80vh]'>
+          <div className="min-h-[80vh]">
             <Routes>
-              <Route path='/home' element={<Home />} />
-              <Route path='/' element={<Login />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/cadastro' element={<Cadastro />} />
-              <Route path='/servicos' element={<ListaServico />} />
-              <Route path='/cadastrarservico' element={<FormServico />} />
-              <Route path='/editarservico' element={<FormServico />} />
-              <Route path='/deletarservico/:id' element={<DeletarServico />} />
-              <Route path='/categorias' element={<ListaCategoria />} />
-              <Route path='/cadastrarcategoria' element={<FormCategoria />} />
-              <Route path='/editarcategoria' element={<FormCategoria />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/servicos" element={<ListaServico />} />
+              <Route path="/cadastrarservico" element={<FormServico />} />
+              <Route path="/editarservico" element={<FormServico />} />
+              <Route path="/deletarservico/:id" element={<DeletarServico />} />
+              <Route path="/categorias" element={<ListaCategoria />} />
+              <Route path="/cadastrarcategoria" element={<FormCategoria />} />
+              <Route path="/editarcategoria" element={<FormCategoria />} />
               <Route
-                path='/deletarcategoria/:id'
+                path="/deletarcategoria/:id"
                 element={<DeletarCategoria />}
               />
             </Routes>
