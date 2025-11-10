@@ -1,4 +1,10 @@
+import img1 from "../assets/imagenscaroussel/esteira.jpg.jpg";
+import img2 from "../assets/imagenscaroussel/pilates.jpg.jpg";
+import img3 from "../assets/imagenscaroussel/tenis.jpg.jpg";
+import MyCaroussel from "../components/mycaroussel/MyCaroussel";
 export default function Home() {
+  const images = [img1, img2, img3];
+
   return (
     <>
       <div className=" w-full  min-h-screen grid lg:grid-cols-2 md:grid-cols-2 bg-linear-to-r from-[#2b302e] via-[#3d5041] to-[#527859] ">
@@ -24,7 +30,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="border-2 w-full "></div>
+        <div className="border-2 w-full items-center">
+          <MyCaroussel items={images} />
+        </div>
       </div>
     </>
   );
