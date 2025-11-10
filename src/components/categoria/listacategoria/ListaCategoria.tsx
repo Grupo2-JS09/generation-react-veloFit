@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import type Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
@@ -19,15 +19,13 @@ function ListaCategoria() {
   useEffect(() => {
     if (token === "") {
       ToastAlerta("Você precisa estar logado!", "info");
-      navigate("/");
+      navigate("/login");
     }
-  }, [token]);
+  }, [token, navigate]);
 
-  useEffect(() => {
-    buscarCategorias();
-  }, [categorias.length]);
-
-  async function buscarCategorias() {
+  const buscarCategorias = useCallback(async () => {
+    if (token === "") return;
+    
     try {
       setIsLoading(true);
 
@@ -36,7 +34,6 @@ function ListaCategoria() {
           Authorization: token
         }
       });
-      console.log(categorias);
     } catch (error: any) {
       console.error("Erro ao buscar categorias", error);
       if (error.toString().includes("401")) {
@@ -45,7 +42,13 @@ function ListaCategoria() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [token, handleLogout]);
+
+  useEffect(() => {
+    if (token !== "") {
+      buscarCategorias();
+    }
+  }, [token, buscarCategorias]);
 
   return (
     <>
