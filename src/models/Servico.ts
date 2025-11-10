@@ -7,6 +7,6 @@ export default interface Servico {
   frequencia: number;
   dt_matricula: Date;
   modalidade: string;
-  usuario: Usuario;
+  usuario: Usuario | null;
   categoria: Categoria;
 }
