@@ -11,6 +11,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import { AuthProvider } from "./contexts/AuthContext";
 import Cadastro from "./pages/Cadastro";
+import About from "./pages/About";
 
 export function App() {
   return (
@@ -35,6 +36,7 @@ export function App() {
                 path="/deletarcategoria/:id"
                 element={<DeletarCategoria />}
               />
+              <Route path="/sobre" element={<About />} />
             </Routes>
           </div>
           <Footer />
