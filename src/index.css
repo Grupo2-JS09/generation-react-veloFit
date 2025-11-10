@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+:root {
+  --bg-url: url("https://i.pinimg.com/1200x/77/cd/98/77cd9852179cf373847b46869b3ffbd5.jpg");
+  --ferngreen: #537a5a;
+  --celadon: #9ae19d;
+  --tomato: #f06543;
+  --mistyrose: #f9e0d9;
+  --jet: #2c302e;
+}
