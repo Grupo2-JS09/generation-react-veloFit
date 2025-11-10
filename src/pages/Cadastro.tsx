@@ -6,7 +6,6 @@ export default function Cadastro() {
   const [foto, setFoto] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-
   const [erros, setErros] = useState<Record<string, string>>({});
   const [sucesso, setSucesso] = useState<string | null>(null);
 
@@ -15,55 +14,37 @@ export default function Cadastro() {
     const novosErros: Record<string, string> = {};
     setSucesso(null);
 
-    // 🔹 Nome - mínimo de 3 letras
-    if (!nome.trim()) {
-      novosErros.nome = "⚠️ Campo obrigatório.";
-    } else if (nome.trim().length < 3) {
+    if (!nome.trim()) novosErros.nome = "⚠️ Campo obrigatório.";
+    else if (nome.trim().length < 3)
       novosErros.nome = "❌ O nome deve ter pelo menos 3 letras.";
-    }
 
-    // 🔹 E-mail - precisa ser válido e de domínio comum
-    if (!email.trim()) {
-      novosErros.email = "⚠️ Campo obrigatório.";
-    } else {
-      const emailRegex =
-        /^[a-zA-Z0-9._%+-]+@(gmail|outlook|hotmail|yahoo|icloud|live)\.(com|com\.br)$/;
-      if (!emailRegex.test(email)) {
-        novosErros.email =
-          "❌ Insira um e-mail válido (ex: usuario@gmail.com).";
-      }
-    }
+    const emailRegex =
+      /^[a-zA-Z0-9._%+-]+@(gmail|outlook|hotmail|yahoo|icloud|live)\.(com|com\.br)$/;
+    if (!email.trim()) novosErros.email = "⚠️ Campo obrigatório.";
+    else if (!emailRegex.test(email))
+      novosErros.email = "❌ Insira um e-mail válido (ex: usuario@gmail.com).";
 
-    // 🔹 Foto de Perfil - deve começar com http ou https
-    if (!foto.trim()) {
-      novosErros.foto = "⚠️ Campo obrigatório.";
-    } else if (!/^https?:\/\/.+/i.test(foto)) {
+    if (!foto.trim()) novosErros.foto = "⚠️ Campo obrigatório.";
+    else if (!/^https?:\/\/.+/i.test(foto))
       novosErros.foto = "❌ Insira uma URL válida (deve começar com http ou https).";
-    }
 
-    // 🔹 Senha - precisa ser forte
-    if (!senha.trim()) {
-      novosErros.senha = "⚠️ Campo obrigatório.";
-    } else {
+    if (!senha.trim()) novosErros.senha = "⚠️ Campo obrigatório.";
+    else {
       const senhaValida = validarSenhaForte(senha);
       if (!senhaValida.ok) novosErros.senha = "❌ " + senhaValida.mensagem;
     }
 
-    // 🔹 Confirmar senha
-    if (!confirmarSenha.trim()) {
+    if (!confirmarSenha.trim())
       novosErros.confirmarSenha = "⚠️ Campo obrigatório.";
-    } else if (senha !== confirmarSenha) {
+    else if (senha !== confirmarSenha)
       novosErros.confirmarSenha = "❌ As senhas não conferem.";
-    }
 
     setErros(novosErros);
 
-    if (Object.keys(novosErros).length === 0) {
+    if (Object.keys(novosErros).length === 0)
       setSucesso("✅ Cadastro realizado com sucesso!");
-    }
   };
 
-  // 🔹 Função de validação de senha forte
   function validarSenhaForte(senha: string) {
     if (senha.length < 8)
       return { ok: false, mensagem: "A senha deve ter pelo menos 8 caracteres." };
@@ -80,32 +61,35 @@ export default function Cadastro() {
   }
 
   return (
-    <div className="min-h-screen w-full flex bg-gradient-to-br from-gray-900 via-emerald-900/40 to-gray-900 relative overflow-hidden">
-      {/* Fundos visuais suaves */}
+    <div
+      className="min-h-screen w-full flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 via-emerald-900/40 to-gray-900 relative overflow-hidden"
+      style={{ backgroundColor: "#0f172a" }}
+    >
+      {/* Fundos visuais */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,140,0,0.15),_transparent_60%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(16,185,129,0.15),_transparent_60%)]"></div>
 
       <div className="relative flex flex-col lg:flex-row w-full backdrop-blur-[2px]">
         {/* LADO ESQUERDO */}
-        <div className="flex flex-col justify-center w-full lg:w-1/2 px-16 lg:px-28 py-24 text-white">
-          <div className="flex items-center gap-4 mb-12">
+        <div className="flex flex-col justify-center w-full lg:w-1/2 px-8 sm:px-12 md:px-16 lg:px-24 py-12 lg:py-24 text-white text-center lg:text-left">
+          <div className="flex items-center justify-center lg:justify-start gap-4 mb-10">
             <div className="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
               <span className="text-4xl font-bold">V</span>
             </div>
             <span className="text-4xl font-bold">VeloFit</span>
           </div>
 
-          <h1 className="text-7xl font-extrabold mb-8 leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 leading-tight tracking-tight">
             Transforme seu corpo com{" "}
             <span className="text-orange-500">VeloFit</span>
           </h1>
 
-          <p className="text-gray-300 text-2xl mb-16 max-w-xl leading-relaxed">
+          <p className="text-gray-300 text-lg sm:text-xl md:text-2xl mb-12 lg:mb-16 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             Sistema completo de gestão para academias. Cadastre serviços,
             gerencie membros e impulsione seu negócio fitness.
           </p>
 
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10">
             <Feature
               icon="📊"
               title="Acompanhe Seu Progresso"
@@ -125,14 +109,16 @@ export default function Cadastro() {
         </div>
 
         {/* LADO DIREITO */}
-        <div className="flex w-full lg:w-1/2 items-center justify-center p-12">
-          <div className="w-full max-w-xl bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-12 rounded-3xl shadow-2xl">
-            <h2 className="text-5xl font-bold text-white mb-3">Criar Conta</h2>
-            <p className="text-gray-400 mb-10 text-2xl">
+        <div className="flex w-full lg:w-1/2 items-center justify-center p-6 sm:p-10 md:p-12">
+          <div className="w-full max-w-md sm:max-w-lg bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-8 sm:p-10 md:p-12 rounded-3xl shadow-2xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3">
+              Criar Conta
+            </h2>
+            <p className="text-gray-400 mb-8 sm:mb-10 text-lg sm:text-xl">
               Junte-se à comunidade VeloFit
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
               <Input
                 label="Nome Completo"
                 value={nome}
@@ -180,7 +166,7 @@ export default function Cadastro() {
 
               <button
                 type="submit"
-                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20"
+                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-lg sm:text-xl py-3.5 sm:py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20"
               >
                 Cadastrar
               </button>
@@ -196,12 +182,12 @@ export default function Cadastro() {
                   setErros({});
                   setSucesso(null);
                 }}
-                className="w-full border border-gray-600 hover:bg-gray-700/50 text-gray-300 font-medium text-lg py-3.5 rounded-xl transition duration-200"
+                className="w-full border border-gray-600 hover:bg-gray-700/50 text-gray-300 font-medium text-base sm:text-lg py-3 rounded-xl transition duration-200"
               >
                 Limpar Formulário
               </button>
 
-              <p className="text-center text-gray-400 text-lg mt-6">
+              <p className="text-center text-gray-400 text-base sm:text-lg mt-6">
                 Já tem uma conta?{" "}
                 <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
                   Fazer Login
@@ -218,14 +204,14 @@ export default function Cadastro() {
 function Input({ label, value, onChange, placeholder, type = "text", erro }: any) {
   return (
     <div>
-      <label className="text-gray-300 text-lg font-medium mb-2 block">
+      <label className="text-gray-300 text-base sm:text-lg font-medium mb-2 block">
         {label}
       </label>
       <input
         type={type}
         className={`w-full bg-gray-900/50 border ${
           erro ? "border-red-500" : "border-gray-600"
-        } rounded-xl p-4 text-white text-lg placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition`}
+        } rounded-xl p-3 sm:p-4 text-white text-base sm:text-lg placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition`}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -237,13 +223,15 @@ function Input({ label, value, onChange, placeholder, type = "text", erro }: any
 
 function Feature({ icon, title, text }: any) {
   return (
-    <div className="flex items-start gap-5">
-      <div className="w-11 h-11 bg-orange-500/20 rounded-full flex items-center justify-center mt-1">
-        <span className="text-orange-500 text-2xl">{icon}</span>
+    <div className="flex items-start gap-4 sm:gap-5">
+      <div className="w-10 h-10 sm:w-11 sm:h-11 bg-orange-500/20 rounded-full flex items-center justify-center mt-1">
+        <span className="text-orange-500 text-xl sm:text-2xl">{icon}</span>
       </div>
       <div>
-        <h3 className="font-semibold text-2xl mb-2">{title}</h3>
-        <p className="text-gray-400 text-lg leading-relaxed">{text}</p>
+        <h3 className="font-semibold text-lg sm:text-2xl mb-2">{title}</h3>
+        <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
+          {text}
+        </p>
       </div>
     </div>
   );
