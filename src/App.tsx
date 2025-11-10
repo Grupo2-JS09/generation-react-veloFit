@@ -20,17 +20,17 @@ export function App() {
           <Navbar />
           <div className="min-h-[80vh]">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/servicos" element={<ListaServico />} />
-              <Route path="/cadastrarservico" element={<FormServico />} />
-              <Route path="/editarservico/:id" element={<FormServico />} />
-              <Route path="/deletarservico/:id" element={<DeletarServico />} />
-              <Route path="/categorias" element={<ListaCategoria />} />
-              <Route path="/cadastrarcategoria" element={<FormCategoria />} />
-              <Route path="/editarcategoria/:id" element={<FormCategoria />} />
+              <Route path='/home' element={<Home />} />
+              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/cadastro' element={<Cadastro />} />
+              <Route path='/servicos' element={<ListaServico />} />
+              <Route path='/cadastrarservico' element={<FormServico />} />
+              <Route path='/editarservico/:id' element={<FormServico />} />
+              <Route path='/deletarservico/:id' element={<DeletarServico />} />
+              <Route path='/categorias' element={<ListaCategoria />} />
+              <Route path='/cadastrarcategoria' element={<FormCategoria />} />
+              <Route path='/editarcategoria/:id' element={<FormCategoria />} />
               <Route
                 path="/deletarcategoria/:id"
                 element={<DeletarCategoria />}
