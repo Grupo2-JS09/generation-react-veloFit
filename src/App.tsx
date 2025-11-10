@@ -18,7 +18,7 @@ export function App() {
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
-          <div className="min-h-[80vh]">
+          <div className="min-h-[80vh] py-20">
             <Routes>
               <Route path='/home' element={<Home />} />
               <Route path='/' element={<Login />} />
