@@ -1,10 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --bg-url: url("https://i.pinimg.com/1200x/77/cd/98/77cd9852179cf373847b46869b3ffbd5.jpg");
+  --bg-url: url("https://t3.ftcdn.net/jpg/01/19/59/74/360_F_119597487_SnvLBdheEGOxu05rMQ5tCzo250cRrTz9.jpg");
   --ferngreen: #537a5a;
   --celadon: #9ae19d;
   --tomato: #f06543;
   --mistyrose: #f9e0d9;
   --jet: #2c302e;
+}
+.bg-velofit {
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-velofit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(42, 21, 14, 0.45) 0%,
+    rgba(42, 21, 14, 0.55) 100%
+  );
+  pointer-events: none;
+}
+.vf-container {
+  position: relative;
+  isolation: isolate;
+}
+
+/* alterar cores das setas do banner */
+.swiper-button-prev,
+.swiper-button-next {
+  /* Ex: Mudar a cor da seta para a sua cor 'tomato' */
+  color: var(--tomato) !important; /* Usamos a cor que você definiu */
+  padding: 5px;
+  background-color: var(--jet);
+  padding: 15px;
+  border-radius: 50%;
 }

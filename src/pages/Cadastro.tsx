@@ -126,7 +126,7 @@ export default function Cadastro() {
 
         {/* LADO DIREITO */}
         <div className="flex w-full lg:w-1/2 items-center justify-center p-12">
-          <div className="w-full max-w-xl bg-gray-800/70 backdrop-blur-md border border-gray-700/40 p-12 rounded-3xl shadow-2xl">
+          <div className="w-full max-w-xl bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-12 rounded-3xl shadow-2xl">
             <h2 className="text-5xl font-bold text-white mb-3">Criar Conta</h2>
             <p className="text-gray-400 mb-10 text-2xl">
               Junte-se à comunidade VeloFit
@@ -180,7 +180,7 @@ export default function Cadastro() {
 
               <button
                 type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-500/20"
+                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20"
               >
                 Cadastrar
               </button>
