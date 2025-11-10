@@ -1,9 +1,15 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function Navbar() {
-  return (
-    <>
-      <nav className='bg-(--jet) py-4 px-8'>
+  const {usuario} = useContext(AuthContext);
+
+  let component: ReactNode;
+
+  if(usuario.token !== "") {
+    component = (
+      <nav className='bg-(--jet) py-4 px-8 fixed top-0 left-0 right-0 z-50'>
         <div className='container mx-auto flex justify-between items-center'>
         <div className="w-10 h-10 bg-(--celadon) rounded-full flex items-center justify-center">
             <Link to='/home'><img src="https://i.imgur.com/H6qOppX.png" alt="VeloFit" className="w-8 h-8"/></Link>
@@ -57,6 +63,12 @@ function Navbar() {
           </div>
         </div>
       </nav>
+    )
+  }
+
+  return (
+    <>
+      {component}
     </>
   );
 }
