@@ -6,23 +6,34 @@ import ListaServico from "./components/servico/listaservico/ListaServico";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
+import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCategoria";
+import ListaCategoria from "./components/categoria/listacategoria/ListaCategoria";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
-        <div className="min-h-[80vh]">
+        <div className='min-h-[80vh]'>
           <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<ListaServico />} />
-            <Route path="/cadastrarservico" element={<FormServico />} />
-            <Route path="/editarservico" element={<FormServico />} />
-            <Route path="/deletarservico/:id" element={<DeletarServico />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<ListaServico />} />
+            <Route path='/cadastrarservico' element={<FormServico />} />
+            <Route path='/editarservico' element={<FormServico />} />
+            <Route path='/deletarservico/:id' element={<DeletarServico />} />
+            <Route path='/categorias' element={<ListaCategoria />} />
+            <Route path='/cadastrarcategoria' element={<FormCategoria />} />
+            <Route path='/editarcategoria' element={<FormCategoria />} />
+            <Route path='/deletarcategoria/:id' element={<DeletarCategoria />} />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </>
   );
 }
+
+export default App;
