@@ -20,8 +20,8 @@ export function App() {
           <Navbar />
           <div className='min-h-[80vh]'>
             <Routes>
-              <Route path='/' element={<Home />} />
               <Route path='/home' element={<Home />} />
+              <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/cadastro' element={<Cadastro />} />
               <Route path='/servicos' element={<ListaServico />} />
