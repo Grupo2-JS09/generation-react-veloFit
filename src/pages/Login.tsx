@@ -33,7 +33,7 @@ function Login() {
   return (
     <>
       <div className="flex items-center justify-center bg-[url('https://64.media.tumblr.com/tumblr_m1me4nvOwe1rsbhe4o1_500.gif')] bg-cover bg-center bg-no-repeat relative isolate min-h-screen ">
-        <div className='flex flex-col bg-transparent shadow-[0_0_40px_rgba(0,0,0,0.8)] rounded-3xl text-white w-96 h-120 justify-center items-center'>
+        <div className='flex flex-col bg-transparent shadow-[0_0_40px_rgba(0,0,0,0.8)] rounded-3xl text-white w-96 h-120 justify-center items-center backdrop-blur-sm'>
           <div className="w-1/3 h-1/3">
             <img src="https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png" alt="" />
           </div>
@@ -64,7 +64,7 @@ function Login() {
                 placeholder='Insira sua senha'
               />
             </div>
-            <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-500/20">
+            <button type="submit" className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-500/20">
               Entrar
             </button>
           </form>
