@@ -8,3 +8,24 @@
   --mistyrose: #f9e0d9;
   --jet: #2c302e;
 }
+.bg-velofit {
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-velofit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(42, 21, 14, 0.45) 0%,
+    rgba(42, 21, 14, 0.55) 100%
+  );
+  pointer-events: none;
+}
+.vf-container {
+  position: relative;
+  isolation: isolate;
+}
