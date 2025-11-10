@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "",
+  baseURL: "https://generation-velofit-1.onrender.com",
 });
 
 export const cadastrarUsuario = async (
@@ -49,4 +49,9 @@ export const atualizar = async (
 
 export const deletar = async (url: string, header: object) => {
   await api.delete(url, header);
+};
+
+export const CalcularMensalidade = async (url: string, setDados: Function) => {
+  const resposta = await api.get(url);
+  setDados(resposta.data);
 };
