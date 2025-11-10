@@ -9,6 +9,7 @@ import ListaServico from "./components/servico/listaservico/ListaServico";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
 
 export function App() {
   return (
@@ -32,6 +33,7 @@ export function App() {
             />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </>
   );
