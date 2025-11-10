@@ -7,8 +7,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import type Servico from "../../../models/Servico";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
-import { ToastAlerta } from "../../utils/ToastAlerta";
-
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 function FormServico() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -57,7 +56,7 @@ function FormServico() {
 
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("Você precisa estar logado", "error");
+      ToastAlerta("Você precisa estar logado", "info");
       navigate("/");
     }
   }, [token]);
@@ -135,46 +134,74 @@ function FormServico() {
   const carregandoCategoria = categoria.nome_categoria === "";
 
   return (
-    <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">
+    <div className="min-h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6">
+      <h1 className="flex flex-col items-center py-10 px-6 text-3xl font-bold">
         {id !== undefined ? "Editar Servico" : "Cadastrar Servico"}
       </h1>
 
-      <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovoServico}>
+      <form className='bg-slate-800/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700'
+        onSubmit={gerarNovoServico}>
         <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Título do Servico</label>
+          <label htmlFor="modalidade"  className='block mb-2 text-sm font-semibold'>Modalidade do Servico</label>
           <input
             type="text"
-            placeholder="Titulo"
-            name="titulo"
+            placeholder="Modalidades..."
+            name="modalidade"
             required
-            className="border-2 border-slate-700 rounded p-2"
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
             value={servico.modalidade}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
+
         <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Servico</label>
+          <label htmlFor="frequencia" className='flex mb-2 text-sm font-semibold'>Frequência</label>
           <input
-            type="text"
-            placeholder="Texto"
-            name="texto"
+            type="number"
+            placeholder="Frequência por semana..."
+            name="frequencia"
             required
-            className="border-2 border-slate-700 rounded p-2"
-            value={servico.modalidade}
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={servico.frequencia}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="valor_mensalidade" className='flex mb-2 text-sm font-semibold'>Valor da Mensalidade</label>
+          <input
+            type="number"
+            placeholder="Valor da mensalidade"
+            name="valor_mensalidade"
+            required
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={servico.valor_mensalidade}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+          />
+        </div>
+        
+        <div className="flex flex-col gap-2">
+          <label htmlFor="data" className='flex mb-2 text-sm font-semibold'>Data da Matrícula</label>
+          <input
+            type="date" 
+            name="data"
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={servico.dt_matricula}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+          />
+        </div>
+
+        
         <div className="flex flex-col gap-2">
           <p>Categoria do Servico</p>
           <select
-            name="tema"
-            id="tema"
+            name="categoria"
+            id="categoria"
             className="border p-2 border-slate-800 rounded"
             onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
           >
             <option value="" selected disabled>
-              Selecione um Tema
+              Selecione uma Categoria
             </option>
 
             {categorias.map((categoria) => (
@@ -186,8 +213,7 @@ function FormServico() {
         </div>
         <button
           type="submit"
-          className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800
-                               text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
+          className='mt-4 w-full px-6 py-3 rounded-lg bg-(--celadon) hover:bg-(--ferngreen) transition font-semibold text-white text-lg shadow-md'
           disabled={carregandoCategoria}
         >
           {isLoading ? (

@@ -4,7 +4,7 @@ import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Servico from "../../../models/Servico";
 import { buscar, deletar } from "../../../services/Service";
-import { ToastAlerta } from "../../utils/ToastAlerta";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function DeletarServico() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ function DeletarServico() {
 
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("Você precisa estar logado", "error");
+      ToastAlerta("Você precisa estar logado", "info");
       navigate("/");
     }
   }, [token]);
