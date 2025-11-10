@@ -26,11 +26,11 @@ export function App() {
               <Route path='/cadastro' element={<Cadastro />} />
               <Route path='/servicos' element={<ListaServico />} />
               <Route path='/cadastrarservico' element={<FormServico />} />
-              <Route path='/editarservico' element={<FormServico />} />
+              <Route path='/editarservico/:id' element={<FormServico />} />
               <Route path='/deletarservico/:id' element={<DeletarServico />} />
               <Route path='/categorias' element={<ListaCategoria />} />
               <Route path='/cadastrarcategoria' element={<FormCategoria />} />
-              <Route path='/editarcategoria' element={<FormCategoria />} />
+              <Route path='/editarcategoria/:id' element={<FormCategoria />} />
               <Route
                 path='/deletarcategoria/:id'
                 element={<DeletarCategoria />}

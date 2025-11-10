@@ -4,6 +4,7 @@ import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import type Categoria from "../../../models/Categoria";
 import { ClipLoader } from "react-spinners";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 function FormCategoria() {
   const navigate = useNavigate();
