@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "",
+  baseURL: "https://generation-velofit-1.onrender.com",
 });
 
 export const cadastrarUsuario = async (
