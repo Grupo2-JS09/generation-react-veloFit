@@ -3,13 +3,20 @@ import {
   InstagramLogoIcon,
   LinkedinLogoIcon,
 } from "@phosphor-icons/react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext, type ReactNode } from "react";
 
 function Footer() {
   const data = new Date().getFullYear();
 
-  return (
-    <footer className="flex justify-end bg-(--jet) text-white border-t border-white/10 backdrop-blur-sm">
-      <div className="container mx-auto px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+  const {usuario} = useContext(AuthContext);
+
+  let component: ReactNode;
+
+  if(usuario.token !== "") {
+    component = (
+      <footer className="flex justify-end bg-(--jet) text-white border-t border-white/10 backdrop-blur-sm py-4 px-8 fixed bottom-0 left-0 right-0 z-50 ">
+      <div className="container mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 bg-(--celadon) rounded-full flex items-center justify-center">
             <img src="https://i.imgur.com/H6qOppX.png" alt="VeloFit" className="w-8 h-8"/>
@@ -46,6 +53,12 @@ function Footer() {
         </div>
       </div>
     </footer>
+    )
+  }
+  return (
+    <>
+    {component}
+    </>
   );
 }
 

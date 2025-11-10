@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCategoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import ListaCategoria from "./components/categoria/listacategoria/ListaCategoria";
