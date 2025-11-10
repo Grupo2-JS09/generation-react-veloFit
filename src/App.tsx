@@ -11,11 +11,13 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import { ToastContainer } from "react-toastify";
 
 export function App() {
   return (
     <>
       <AuthProvider>
+        <ToastContainer/>
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh]">
