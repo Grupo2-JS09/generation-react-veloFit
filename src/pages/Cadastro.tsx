@@ -74,6 +74,7 @@ export default function Cadastro() {
     }
   };
 
+  // 🔹 Função de validação de senha forte
   function validarSenhaForte(senha: string) {
     if (senha.length < 8)
       return { ok: false, mensagem: "A senha deve ter pelo menos 8 caracteres." };
@@ -107,6 +108,7 @@ export default function Cadastro() {
 
           <h1 className="text-4xl font-extrabold mb-4 leading-tight tracking-tight">
             Transforme seu corpo com{" "}
+            <span className="text-orange-500">VeloFit</span>
             <span className="text-orange-500">VeloFit</span>
           </h1>
 
@@ -186,6 +188,9 @@ export default function Cadastro() {
 
               <p className="text-center text-gray-400 text-sm mt-3">
                 Já tem uma conta?{" "}
+                <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
+                  Fazer Login
+                </span>
                 <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
                   Fazer Login
                 </span>
