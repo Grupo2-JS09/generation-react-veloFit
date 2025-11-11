@@ -7,17 +7,51 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import type Servico from "../../../models/Servico";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
-import { ToastAlerta } from "../../utils/ToastAlerta";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormServico() {
   const navigate = useNavigate();
+
+  const modalidades = [
+    { modalidade: 'Boxe', mensalidade: 200 },
+    { modalidade: 'Muay Thai', mensalidade: 220 },
+    { modalidade: 'Jiu-Jitsu', mensalidade: 230 },
+    { modalidade: 'Karatê', mensalidade: 210 },
+    { modalidade: 'Yoga', mensalidade: 180 },
+    { modalidade: 'Pilates', mensalidade: 190 },
+    { modalidade: 'CrossFit', mensalidade: 300 },
+    { modalidade: 'Musculação', mensalidade: 150 },
+    { modalidade: 'Zumba', mensalidade: 170 },
+    { modalidade: 'Funcional', mensalidade: 200 },
+    { modalidade: 'Todos', mensalidade: 500 } 
+  ];
+  const [modalidadeSelecionada, setModalidadeSelecionada] = useState("");
+  const [mensalidade, setMensalidade] = useState<number>(0);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+
   const [servico, setServico] = useState<Servico>({} as Servico);
+
   const { usuario, handleLogout } = useContext(AuthContext);
-  const { id } = useParams<{ id: string }>();
   const token = usuario.token;
+
+  const { id } = useParams<{ id: string }>();
+
+  function handleChange(e) {
+    const selected = e.target.value;
+    setModalidadeSelecionada(selected);
+
+    const encontrada = modalidades.find(m => m.modalidade === selected);
+    if (encontrada) {
+      setMensalidade(encontrada.mensalidade);
+    } else {
+      setMensalidade(0);
+    }
+  }
 
   async function buscarServicoPorId(id: string) {
     try {
@@ -57,7 +91,7 @@ function FormServico() {
 
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("Você precisa estar logado", "error");
+      ToastAlerta("Você precisa estar logado", "info");
       navigate("/");
     }
   }, [token]);
@@ -94,34 +128,42 @@ function FormServico() {
     e.preventDefault();
     setIsLoading(true);
 
+    const payload: Servico = {
+      ...servico,
+      modalidade: modalidadeSelecionada,
+      valor_mensalidade: mensalidade,
+      categoria: categoria,
+      usuario: usuario
+    }
+
     if (id !== undefined) {
       try {
-        await atualizar(`/servicos`, servico, setServico, {
+        await atualizar(`/servicos`, payload, setServico, {
           headers: {
             Authorization: token,
           },
         });
-
         ToastAlerta("Serviço atualizado com sucesso", "sucesso");
       } catch (error: any) {
         if (error.toString().includes("401")) {
           handleLogout();
+          ToastAlerta('Faça login para continuar!', 'info')
         } else {
           ToastAlerta("Erro ao atualizar o Serviço", "erro");
         }
       }
     } else {
       try {
-        await cadastrar(`/servicos`, servico, setServico, {
+        await cadastrar(`/servicos`, payload, setServico, {
           headers: {
             Authorization: token,
           },
         });
-
         ToastAlerta("Serviço cadastrado com sucesso", "sucesso");
       } catch (error: any) {
         if (error.toString().includes("401")) {
           handleLogout();
+          ToastAlerta('Faça login para continuar!', 'info')
         } else {
           ToastAlerta("Erro ao cadastrar o Serviço", "erro");
         }
@@ -135,46 +177,76 @@ function FormServico() {
   const carregandoCategoria = categoria.nome_categoria === "";
 
   return (
-    <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">
+    <div className="bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6">
+      <h1 className="flex flex-col items-center  text-3xl font-bold">
         {id !== undefined ? "Editar Servico" : "Cadastrar Servico"}
       </h1>
 
-      <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovoServico}>
+      <form className='bg-slate-800/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700'
+        onSubmit={gerarNovoServico}>
         <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Título do Servico</label>
-          <input
-            type="text"
-            placeholder="Titulo"
-            name="titulo"
+          <label htmlFor="modalidade"  className='block mb-2 text-sm font-semibold'>Modalidade do Servico</label>
+          <select
             required
-            className="border-2 border-slate-700 rounded p-2"
-            value={servico.modalidade}
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={modalidadeSelecionada}
+            onChange={handleChange}
+          >
+            <option value="">Selecione...</option>
+        {modalidades.map((m, index) => (
+          <option key={index} value={m.modalidade}>
+            {m.modalidade}
+          </option>
+        ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="valor_mensalidade" className='flex mb-2 text-sm font-semibold'>Valor da Mensalidade</label>
+          <input
+            type="number"
+            readOnly
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={mensalidade}
+          />
+        </div>
+          <label htmlFor="frequencia" className='flex mb-2 text-sm font-semibold'>Frequência</label>
+          <input
+            type="number"
+            placeholder="Frequência por semana..."
+            name="frequencia"
+            required
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={servico.frequencia}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
+        
+
+        
         <div className="flex flex-col gap-2">
-          <label htmlFor="titulo">Servico</label>
+          <label htmlFor="data" className='flex mb-2 text-sm font-semibold'>Data da Matrícula</label>
           <input
-            type="text"
-            placeholder="Texto"
-            name="texto"
-            required
-            className="border-2 border-slate-700 rounded p-2"
-            value={servico.modalidade}
+            type="date" 
+            name="dt_matricula"
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={servico.dt_matricula}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
+
+        
         <div className="flex flex-col gap-2">
           <p>Categoria do Servico</p>
           <select
-            name="tema"
-            id="tema"
+            name="categoria"
+            id="categoria"
             className="border p-2 border-slate-800 rounded"
             onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
           >
             <option value="" selected disabled>
-              Selecione um Tema
+              Selecione uma Categoria
             </option>
 
             {categorias.map((categoria) => (
@@ -186,8 +258,7 @@ function FormServico() {
         </div>
         <button
           type="submit"
-          className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800
-                               text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
+          className='mt-4 w-full px-6 py-3 rounded-lg bg-(--celadon) hover:bg-(--ferngreen) transition font-semibold text-white text-lg shadow-md'
           disabled={carregandoCategoria}
         >
           {isLoading ? (
