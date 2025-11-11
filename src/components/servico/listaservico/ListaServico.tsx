@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Servico from "../../../models/Servico";
 import { buscar } from "../../../services/Service";
 import CardServicos from "../cardservico/CardServico";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaServicos() {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ function ListaServicos() {
 
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("Você precisa estar logado!", "info");
+      alert("Você precisa estar logado!");
       navigate("/");
     }
   }, [token]);
@@ -59,14 +58,6 @@ function ListaServicos() {
               Nenhum Servico foi encontrado!
             </span>
           )}
-
-          <div className='flex justify-end w-full max-w-6xl mb-10'>
-            <Link to='/cadastrarservico'>
-              <button className='px-6 py-2 rounded-lg bg-(--tomato) hover:bg-orange-600 transition font-semibold text-sm text-white shadow-md'>
-                Cadastrar Novo Serviço
-              </button>
-            </Link>
-          </div>
 
           <div
             className="grid grid-cols-1 md:grid-cols-2

@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import React, { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import type UsuarioLogin from "../models/UsuarioLogin";
-import { ToastAlerta } from "../utils/ToastAlerta";
 
 function Login() {
   const navigate = useNavigate();
 
-  const { usuario, handleLogin } = useContext(AuthContext);
+  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
 
   const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
     {} as UsuarioLogin
@@ -16,7 +15,6 @@ function Login() {
   useEffect(() => {
     if (usuario.token !== "") {
       navigate("/home");
-      ToastAlerta(`Seja bem-vindo ${usuario.nome}`, 'sucess')
     }
   }, [usuario]);
 
