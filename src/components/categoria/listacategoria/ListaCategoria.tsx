@@ -52,7 +52,7 @@ function ListaCategoria() {
 
   return (
     <>
-      <div className='min-h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white'>
+      <div className='min-h-screen bg-linear-to-b from-[#283a2b] via-(--celadon) to-[#aee9b1] text-white'>
         <div className='flex flex-col items-center min-h-screen py-10 px-6'>
           <h1 className='text-4xl font-bold mb-12 text-center tracking-tight'>
             Categorias
@@ -68,7 +68,7 @@ function ListaCategoria() {
 
           <div className='flex justify-end w-full max-w-6xl mb-10'>
             <Link to='/cadastrarcategoria'>
-              <button className='px-6 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 transition font-semibold text-sm text-white shadow-md'>
+              <button className='px-6 py-2 rounded-lg bg-(--tomato) hover:bg-[#bd4e32] transition font-semibold text-sm text-white shadow-md'>
                 Cadastrar nova categoria
               </button>
             </Link>
