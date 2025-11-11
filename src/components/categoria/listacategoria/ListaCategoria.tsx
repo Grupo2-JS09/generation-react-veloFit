@@ -57,7 +57,6 @@ function ListaCategoria() {
           <h1 className='text-4xl font-bold mb-12 text-center tracking-tight'>
             Categorias
           </h1>
-
           {isLoading && <SyncLoader color='#74b9ff' size={32} />}
 
           {!isLoading && categorias.length === 0 && (

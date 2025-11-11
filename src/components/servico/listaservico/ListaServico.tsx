@@ -15,6 +15,7 @@ function ListaServicos() {
   const [servicos, setServicos] = useState<Servico[]>([]);
 
   const { usuario, handleLogout } = useContext(AuthContext);
+  
   const token = usuario.token;
 
   useEffect(() => {

@@ -50,9 +50,9 @@ function CardServicos({ servico }: CardServicosProps) {
         </div>
 
         <div className="p-4 ">
-          {/* <h4 className="text-xl font-semibold text-center text-(--tomato)">
+          <h4 className="text-xl font-semibold text-center text-(--tomato)">
             {servico.categoria.nome_categoria}
-          </h4> */}
+          </h4> 
           <p className='font-medium text-white'>Modalidades: {servico.modalidade}</p>
           <p className='font-medium text-white'>Frequência: {servico.frequencia}</p>
           <p className='font-medium text-white'>Data da matrícula: {servico.dt_matricula ? new Date(servico.dt_matricula).toLocaleDateString() : 'N/A'}</p>
