@@ -14,6 +14,7 @@ import Navbar from "./components/navbar/Navbar";
 import { AuthProvider } from "./contexts/AuthContext";
 import About from "./pages/About";
 import Cadastro from "./pages/Cadastro";
+import Contato from "./pages/Contato";
 
 export function App() {
   return (
@@ -41,6 +42,7 @@ export function App() {
               />
               <Route path="/sobre" element={<About />} />
               <Route path="/perfil" element={<Perfil />} />
+              <Route path="/contato" element={<Contato />} />
             </Routes>
           </div>
           <Footer />
