@@ -29,7 +29,6 @@ function Cards({
         </span>
       )}
 
-      {/* Título e preço */}
       <div>
         <h2 className="text-sm font-bold uppercase opacity-80">PLANO</h2>
         <h1 className="text-2xl font-bold mb-2">{servico.modalidade}</h1>
@@ -50,7 +49,6 @@ function Cards({
         )}
       </div>
 
-      {/* Benefícios */}
       <ul className="mt-6 space-y-2">
         {beneficios.map((b, i) => (
           <li
@@ -69,7 +67,6 @@ function Cards({
         ))}
       </ul>
 
-      {/* Botão */}
       <Link to="/servicos">
         <button
           className={`mt-6 w-full py-2 rounded-xl font-semibold  bg-(--tomato) text-white hover:bg-(--jet)`}

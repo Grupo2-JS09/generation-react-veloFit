@@ -4,8 +4,8 @@ import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Servico from "../../../models/Servico";
 import { buscar } from "../../../services/Service";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 import CardServicos from "../cardservico/CardServico";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function ListaServicos() {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ function ListaServicos() {
           </Link>
         </div>
 
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full mb-10">
           <div className="grid place-items-center gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {servicos.map((servico) => (
               <CardServicos key={servico.id} servico={servico} />

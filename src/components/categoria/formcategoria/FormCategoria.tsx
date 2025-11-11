@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 import type Categoria from "../../../models/Categoria";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function FormCategoria() {
   const navigate = useNavigate();

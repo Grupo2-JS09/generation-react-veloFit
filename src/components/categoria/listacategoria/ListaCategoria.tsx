@@ -4,8 +4,8 @@ import { SyncLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
 import CardCategoria from "../cardcategoria/CardCategoria";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function ListaCategoria() {
   const navigate = useNavigate();

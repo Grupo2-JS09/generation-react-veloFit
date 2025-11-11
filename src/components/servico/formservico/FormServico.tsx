@@ -7,7 +7,7 @@ import type Categoria from "../../../models/Categoria";
 import type Servico from "../../../models/Servico";
 import type Usuario from "../../../models/Usuario";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function FormServico() {
   const navigate = useNavigate();
