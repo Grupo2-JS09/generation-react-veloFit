@@ -13,6 +13,7 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
+import Perfil from "./pages/Perfil";
 
 export function App() {
   return (
@@ -39,6 +40,7 @@ export function App() {
                 element={<DeletarCategoria />}
               />
               <Route path="/sobre" element={<About />} />
+              <Route path="/perfil" element={<Perfil />} />
             </Routes>
           </div>
           <Footer />

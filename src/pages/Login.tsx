@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import type UsuarioLogin from "../models/UsuarioLogin";
 import { ToastAlerta } from "../utils/ToastAlerta";
@@ -15,7 +15,7 @@ function Login() {
 
   useEffect(() => {
     if (usuario.token !== "") {
-      navigate("/home");
+      navigate("/home");      
       ToastAlerta(`Seja bem-vindo ${usuario.nome}`, 'sucess')
     }
   }, [usuario]);
@@ -34,7 +34,7 @@ function Login() {
 
   return (
     <>
-      <div className="flex items-center justify-center bg-[url('https://64.media.tumblr.com/tumblr_m1me4nvOwe1rsbhe4o1_500.gif')] bg-cover bg-center bg-no-repeat relative isolate min-h-screen ">
+      <div className="flex items-center justify-center bg-[url('https://i.pinimg.com/originals/be/f6/13/bef61312df4494ac0d893c04ddd9d93f.gif')] bg-cover bg-center bg-no-repeat relative isolate min-h-screen ">
         <div className='flex flex-col bg-transparent shadow-[0_0_40px_rgba(0,0,0,0.8)] rounded-3xl text-white w-96 h-120 justify-center items-center backdrop-blur-sm'>
           <div className="w-1/3 h-1/3">
             <img src="https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png" alt="" />
@@ -69,6 +69,13 @@ function Login() {
             <button type="submit" className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-500/20">
               Entrar
             </button>
+            <div className="py-4">
+              
+                <p>Ainda não tem conta? cadastre - se</p>
+                <Link to='/cadastro'>
+                  <span className="flex justify-center text-(--tomato) font-semibold text-md hover:text-2xl hover:scale-50 hover:underline cursor-pointer transition-all duration-300 hover:scale-105 transition-all duration-300">Aqui</span>
+              </Link>
+            </div>
           </form>
         </div>
       </div>
