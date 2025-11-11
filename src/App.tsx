@@ -7,11 +7,8 @@ import FormServico from "./components/servico/formservico/FormServico";
 import ListaServico from "./components/servico/listaservico/ListaServico";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
-import { AuthProvider } from "./contexts/AuthContext";
-import Cadastro from "./pages/Cadastro";
-import ListaCards from "./components/listacards/ListaCards";
+import { ToastContainer } from "react-toastify";
+import Perfil from "./pages/Perfil";
 
 export function App() {
   return (
@@ -36,13 +33,13 @@ export function App() {
                 path='/deletarcategoria/:id'
                 element={<DeletarCategoria />}
               />
+              <Route path="/sobre" element={<About />} />
+              <Route path="/perfil" element={<Perfil />} />
             </Routes>
           </div>
           <Footer />
         </BrowserRouter>
       </AuthProvider>
-
-      {/* <ListaCards /> */}
     </>
   );
 }

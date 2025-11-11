@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+*{
+  font-family: "Rubik", sans-serif;
+}
+
 :root {
   --bg-url: url("https://t3.ftcdn.net/jpg/01/19/59/74/360_F_119597487_SnvLBdheEGOxu05rMQ5tCzo250cRrTz9.jpg");
   --ferngreen: #537a5a;
