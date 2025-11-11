@@ -75,11 +75,6 @@ function DeletarCategoria() {
   return (
     <div className='flex h-screen justify-center items-center min-h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white'>
       <div className='flex flex-col w-1/3 h-1/4 justify-center align-center items-center bg-slate-800 bg-opacity-70 rounded-2xl shadow-lg p-6 hover:bg-slate-700 hover:scale-105 transition duration-300'>
-
-        <p className="text-center font-semibold mb-4">
-          Você tem certeza de que deseja apagar a categoria a seguir?
-        </p>
-
         <div className='flex items-center gap-2 mb-3'>
           <h2 className='text-xl font-semibold text-center text-orange-400'>
             {categoria.nome_categoria}
@@ -87,7 +82,7 @@ function DeletarCategoria() {
         </div>
         <div className='flex gap-6 justify-center align-center h-fit text-center'>
           <button
-            className='flex items-center justify-center w-auto p-3 mt-4 text-center bg-(--celadon) hover:bg-(--ferngreen) text-white rounded-xl font-semibold transition-all duration-300 '
+            className='flex items-center justify-center w-auto p-3 mt-4 text-center bg-[var(--darkblue)] hover:bg-blue-900 text-white rounded-xl font-semibold transition-all duration-300 '
             onClick={deletarCategoria}
           >
             {isLoading ? (
@@ -98,7 +93,7 @@ function DeletarCategoria() {
           </button>
           
           <button
-            className='flex items-center justify-center w-auto p-3 mt-4 bg-(--tomato) hover:bg-orange-900 text-white rounded-xl font-semibold transition-all duration-300'
+            className='flex items-center justify-center w-auto p-3 mt-4 bg-[var(--orange)] hover:bg-orange-900 text-white rounded-xl font-semibold transition-all duration-300'
             onClick={retornar}
           >
             Não
