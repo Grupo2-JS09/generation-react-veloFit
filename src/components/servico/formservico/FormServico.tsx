@@ -8,6 +8,7 @@ import type Categoria from "../../../models/Categoria";
 import type Servico from "../../../models/Servico";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
+
 function FormServico() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -92,6 +93,7 @@ function FormServico() {
   async function gerarNovoServico(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
+    console.log(servico)
 
     if (id !== undefined) {
       try {
@@ -184,9 +186,9 @@ function FormServico() {
           <label htmlFor="data" className='flex mb-2 text-sm font-semibold'>Data da Matrícula</label>
           <input
             type="date" 
-            name="data"
+            name="dt_matricula"
             className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={servico.dt_matricula}
+            value={servico.dt_matricula.toDateString()}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
