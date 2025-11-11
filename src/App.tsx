@@ -13,11 +13,13 @@ import About from "./pages/About";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Cards from "./components/cards/Cards";
+import ListaCards from "./components/listacards/ListaCards";
 
 export function App() {
   return (
     <>
-      <AuthProvider>
+      {/* <AuthProvider>
         <ToastContainer/>
         <BrowserRouter>
           <Navbar />
@@ -43,7 +45,9 @@ export function App() {
           </div>
           <Footer />
         </BrowserRouter>
-      </AuthProvider>
+      </AuthProvider> */}
+
+      <ListaCards />
     </>
   );
 }
