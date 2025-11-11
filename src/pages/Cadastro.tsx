@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { cadastrarUsuario } from "../services/Service";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
+  const navigate = useNavigate();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [foto, setFoto] = useState("");
@@ -65,6 +68,10 @@ export default function Cadastro() {
           setFoto("");
           setSenha("");
           setConfirmarSenha("");
+          setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+
         });
       } catch {
         setErros({ geral: "❌ Erro ao cadastrar usuário. Tente novamente." });
@@ -99,16 +106,20 @@ export default function Cadastro() {
       <div className="relative flex flex-col lg:flex-row w-full backdrop-blur-[2px]">
         {/* LADO ESQUERDO */}
         <div className="flex flex-col justify-center w-full lg:w-1/2 px-8 lg:px-12 py-6 text-white">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
-              <span className="text-2xl font-bold">V</span>
-            </div>
-            <span className="text-2xl font-bold">VeloFit</span>
-          </div>
+         <div
+  className="w-24 h-24 rounded-xl flex items-center justify-center shadow-lg shadow-[var(--tomato)/20]"
+  style={{ backgroundColor: "var(--tomato)" }}
+>
+  <img
+    src="https://i.imgur.com/H6qOppX.png"
+    alt="VeloFit Logo"
+    className="w-16 h-16 object-contain"
+  />
+</div>
+
 
           <h1 className="text-4xl font-extrabold mb-4 leading-tight tracking-tight">
             Transforme seu corpo com{" "}
-            <span className="text-orange-500">VeloFit</span>
             <span className="text-orange-500">VeloFit</span>
           </h1>
 
@@ -188,12 +199,12 @@ export default function Cadastro() {
 
               <p className="text-center text-gray-400 text-sm mt-3">
                 Já tem uma conta?{" "}
-                <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
-                  Fazer Login
-                </span>
-                <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
-                  Fazer Login
-                </span>
+                <Link to="/login">
+                  <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
+                    Fazer Login
+                  </span>
+                </Link>
+             
               </p>
             </form>
           </div>
