@@ -9,9 +9,13 @@ import FormServico from "./components/servico/formservico/FormServico";
 import ListaServico from "./components/servico/listaservico/ListaServico";
 import { AuthProvider } from "./contexts/AuthContext";
 import Cadastro from "./pages/Cadastro";
+<<<<<<< HEAD
+import About from "./pages/About";
+=======
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
+>>>>>>> main
 
 export function App() {
   return (
@@ -20,6 +24,21 @@ export function App() {
         <ToastContainer/>
         <BrowserRouter>
           <Navbar />
+<<<<<<< HEAD
+          <div className="min-h-[80vh]">
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/servicos" element={<ListaServico />} />
+              <Route path="/cadastrarservico" element={<FormServico />} />
+              <Route path="/editarservico" element={<FormServico />} />
+              <Route path="/deletarservico/:id" element={<DeletarServico />} />
+              <Route path="/categorias" element={<ListaCategoria />} />
+              <Route path="/cadastrarcategoria" element={<FormCategoria />} />
+              <Route path="/editarcategoria" element={<FormCategoria />} />
+=======
           <div className="min-h-[80vh] py-20">
             <Routes>
               <Route path='/home' element={<Home />} />
@@ -33,10 +52,12 @@ export function App() {
               <Route path='/categorias' element={<ListaCategoria />} />
               <Route path='/cadastrarcategoria' element={<FormCategoria />} />
               <Route path='/editarcategoria/:id' element={<FormCategoria />} />
+>>>>>>> main
               <Route
                 path="/deletarcategoria/:id"
                 element={<DeletarCategoria />}
               />
+              <Route path="/sobre" element={<About />} />
             </Routes>
           </div>
           <Footer />
