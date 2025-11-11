@@ -54,12 +54,12 @@ function DeletarServico() {
         },
       });
 
-      ToastAlerta("Servico deletado com sucesso", "success");
+      ToastAlerta("Serviço deletado com sucesso", "sucesso");
     } catch (error: any) {
       if (error.toString().includes("401")) {
         handleLogout();
       } else {
-        ToastAlerta("Erro ao deletar o servico.", "error");
+        ToastAlerta("Erro ao deletar o servico.", "erro");
       }
     }
 
@@ -72,32 +72,32 @@ function DeletarServico() {
   }
 
   return (
-    <div className="flex justify-center items-center w-full min-h-screen">
-      <div className="container flex flex-col w-1/3">
-        <h1 className="text-4xl text-center my-4">Deletar Servico</h1>
+    <div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white'>
+      <div className=' bg-slate-800 bg-opacity-70 rounded-2xl shadow-lg p-6 hover:bg-slate-700 hover:scale-105 transition duration-300'>
+        <h1 className="text-4xl text-center my-4">Deletar Serviço</h1>
 
         <p className="text-center font-semibold mb-4">
           Você tem certeza de que deseja apagar o servico a seguir?
         </p>
 
         <div className="border flex flex-col rounded-2xl overflow-hidden justify-between">
-          <header className="py-2 px-6 bg-indigo-600 text-white font-bold text-2xl">
+          {/* <header className="py-2 px-6 bg-indigo-600 text-white font-bold text-2xl">
             Servico
-          </header>
+          </header> */}
           <div className="p-4">
-            <p className="text-xl h-full">{servico.categoria?.nome_categoria}</p>
-            <p>{servico.modalidade}</p>
+            <p className="text-xl h-full text-white">{servico.modalidade}</p>
+            <p className="text-xl  text-white">{servico.categoria?.nome_categoria}</p>
           </div>
-          <div className="flex">
+
+          <div className='flex gap-6 justify-center align-center h-fit text-center'>
             <button
-              className="text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2 m-2"
+              className='flex items-center justify-center w-auto p-3 mt-4 bg-(--tomato) hover:bg-orange-900 text-white rounded-xl font-semibold transition-all duration-300'
               onClick={retornar}
             >
               Não
             </button>
             <button
-              className="w-full text-slate-100 bg-indigo-400
-                        hover:bg-indigo-600 flex items-center justify-center m-2"
+              className='flex items-center justify-center w-auto p-3 mt-4 text-center bg-(--celadon) hover:bg-(--ferngreen) text-white rounded-xl font-semibold transition-all duration-300 '
               onClick={deletarServico}
             >
               {isLoading ? (

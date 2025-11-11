@@ -1,11 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type Servico from "../../../models/Servico";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { buscar } from "../../../services/Service";
 
 interface CardServicosProps {
   servico: Servico;
 }
 
 function CardServicos({ servico }: CardServicosProps) {
+  const { usuario } = useContext(AuthContext)
+  const [valorMensalidade, setValorMensalidade] = useState<number | null>(null);
+
+  const token = usuario.token;
+
+  const {id} = useParams<{id: string}>();
+
+  async function desconto() {
+    try {
+      await buscar(
+        `/servicos/calculo_mensalidade/${servico.id}`,
+        setValorMensalidade, {
+          headers: { Authorization: token }
+        }
+      );
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    desconto();
+  }, [servico.id]);
+
+
   return (
     <div className="flex flex-col items-center bg-slate-800 bg-opacity-70 rounded-2xl shadow-lg p-6 hover:bg-slate-700 hover:scale-105 transition duration-300">
       <div>
@@ -29,7 +57,7 @@ function CardServicos({ servico }: CardServicosProps) {
           <p className='font-medium text-white'>Frequência: {servico.frequencia}</p>
           <p className='font-medium text-white'>Data da matrícula: {servico.dt_matricula ? new Date(servico.dt_matricula).toLocaleDateString() : 'N/A'}</p>
           <p className='font-medium text-white'>Mensalidade: R${servico.valor_mensalidade}</p>
-          <p className='font-medium text-white'>Desconto: R${servico.valor_mensalidade || "Sem desconto"}</p>
+          <p className='font-medium text-white'>Desconto: R${valorMensalidade ? `${valorMensalidade.toFixed(1)}` : "Calculando..."}</p>
           <p className="text-(--celadon)"> <span className='font-semibold text-white'>Categoria:  </span> {servico.categoria?.nome_categoria}</p>
 
         </div>

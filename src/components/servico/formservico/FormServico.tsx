@@ -11,13 +11,47 @@ import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormServico() {
   const navigate = useNavigate();
+
+  const modalidades = [
+    { modalidade: 'Boxe', mensalidade: 200 },
+    { modalidade: 'Muay Thai', mensalidade: 220 },
+    { modalidade: 'Jiu-Jitsu', mensalidade: 230 },
+    { modalidade: 'Karatê', mensalidade: 210 },
+    { modalidade: 'Yoga', mensalidade: 180 },
+    { modalidade: 'Pilates', mensalidade: 190 },
+    { modalidade: 'CrossFit', mensalidade: 300 },
+    { modalidade: 'Musculação', mensalidade: 150 },
+    { modalidade: 'Zumba', mensalidade: 170 },
+    { modalidade: 'Funcional', mensalidade: 200 },
+    { modalidade: 'Todos', mensalidade: 500 } 
+  ];
+  const [modalidadeSelecionada, setModalidadeSelecionada] = useState("");
+  const [mensalidade, setMensalidade] = useState<number>(0);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+
   const [servico, setServico] = useState<Servico>({} as Servico);
+
   const { usuario, handleLogout } = useContext(AuthContext);
-  const { id } = useParams<{ id: string }>();
   const token = usuario.token;
+
+  const { id } = useParams<{ id: string }>();
+
+  function handleChange(e) {
+    const selected = e.target.value;
+    setModalidadeSelecionada(selected);
+
+    const encontrada = modalidades.find(m => m.modalidade === selected);
+    if (encontrada) {
+      setMensalidade(encontrada.mensalidade);
+    } else {
+      setMensalidade(0);
+    }
+  }
 
   async function buscarServicoPorId(id: string) {
     try {
@@ -93,36 +127,43 @@ function FormServico() {
   async function gerarNovoServico(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
-    console.log(servico)
+
+    const payload: Servico = {
+      ...servico,
+      modalidade: modalidadeSelecionada,
+      valor_mensalidade: mensalidade,
+      categoria: categoria,
+      usuario: usuario
+    }
 
     if (id !== undefined) {
       try {
-        await atualizar(`/servicos`, servico, setServico, {
+        await atualizar(`/servicos`, payload, setServico, {
           headers: {
             Authorization: token,
           },
         });
-
         ToastAlerta("Serviço atualizado com sucesso", "sucesso");
       } catch (error: any) {
         if (error.toString().includes("401")) {
           handleLogout();
+          ToastAlerta('Faça login para continuar!', 'info')
         } else {
           ToastAlerta("Erro ao atualizar o Serviço", "erro");
         }
       }
     } else {
       try {
-        await cadastrar(`/servicos`, servico, setServico, {
+        await cadastrar(`/servicos`, payload, setServico, {
           headers: {
             Authorization: token,
           },
         });
-
         ToastAlerta("Serviço cadastrado com sucesso", "sucesso");
       } catch (error: any) {
         if (error.toString().includes("401")) {
           handleLogout();
+          ToastAlerta('Faça login para continuar!', 'info')
         } else {
           ToastAlerta("Erro ao cadastrar o Serviço", "erro");
         }
@@ -136,8 +177,8 @@ function FormServico() {
   const carregandoCategoria = categoria.nome_categoria === "";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6">
-      <h1 className="flex flex-col items-center py-10 px-6 text-3xl font-bold">
+    <div className="bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6">
+      <h1 className="flex flex-col items-center  text-3xl font-bold">
         {id !== undefined ? "Editar Servico" : "Cadastrar Servico"}
       </h1>
 
@@ -145,18 +186,31 @@ function FormServico() {
         onSubmit={gerarNovoServico}>
         <div className="flex flex-col gap-2">
           <label htmlFor="modalidade"  className='block mb-2 text-sm font-semibold'>Modalidade do Servico</label>
-          <input
-            type="text"
-            placeholder="Modalidades..."
-            name="modalidade"
+          <select
             required
             className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={servico.modalidade}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
+            value={modalidadeSelecionada}
+            onChange={handleChange}
+          >
+            <option value="">Selecione...</option>
+        {modalidades.map((m, index) => (
+          <option key={index} value={m.modalidade}>
+            {m.modalidade}
+          </option>
+        ))}
+          </select>
         </div>
 
         <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="valor_mensalidade" className='flex mb-2 text-sm font-semibold'>Valor da Mensalidade</label>
+          <input
+            type="number"
+            readOnly
+            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+            value={mensalidade}
+          />
+        </div>
           <label htmlFor="frequencia" className='flex mb-2 text-sm font-semibold'>Frequência</label>
           <input
             type="number"
@@ -168,19 +222,8 @@ function FormServico() {
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
+        
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="valor_mensalidade" className='flex mb-2 text-sm font-semibold'>Valor da Mensalidade</label>
-          <input
-            type="number"
-            placeholder="Valor da mensalidade"
-            name="valor_mensalidade"
-            required
-            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={servico.valor_mensalidade}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
-        </div>
         
         <div className="flex flex-col gap-2">
           <label htmlFor="data" className='flex mb-2 text-sm font-semibold'>Data da Matrícula</label>
@@ -188,7 +231,7 @@ function FormServico() {
             type="date" 
             name="dt_matricula"
             className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={servico.dt_matricula.toDateString()}
+            value={servico.dt_matricula}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
