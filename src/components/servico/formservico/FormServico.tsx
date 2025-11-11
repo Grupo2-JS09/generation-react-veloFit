@@ -99,7 +99,7 @@ function FormServico() {
       ...servico,
       [e.target.name]: e.target.value,
       categoria: categoria,
-      usuario: usuarioSelecionado, // 👈 agora vinculamos o usuário escolhido
+      usuario: usuarioSelecionado, 
     });
   }
 
@@ -159,7 +159,7 @@ function FormServico() {
       </h1>
 
       <form
-        className="bg-slate-800/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700"
+        className="bg-slate-800/60 rounded-2xl mb-15 shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700"
         onSubmit={gerarNovoServico}
       >
         {/* Usuário contratante */}
@@ -186,6 +186,20 @@ function FormServico() {
           </select>
         </div>
 
+        {/* Modalidade */}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold">Modalidade</label>
+          <input
+            type="text"
+            name="modalidade"
+            required
+            placeholder="Ex: Jiu-Jitsu, Crossfit..."
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value={servico.modalidade || ""}
+            onChange={atualizarEstado}
+          />
+        </div>
+
         {/* Frequência */}
         <div className="flex flex-col gap-2">
           <label className="text-sm font-semibold">Frequência</label>
@@ -196,6 +210,21 @@ function FormServico() {
             required
             className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
             value={servico.frequencia || ""}
+            onChange={atualizarEstado}
+          />
+        </div>
+
+        {/* Valor do serviço */}
+
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold">Valor</label>
+          <input
+            type="number"
+            placeholder="Valor do serviço"
+            name="valor_mensalidade"
+            required
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value={servico.valor_mensalidade || ""}
             onChange={atualizarEstado}
           />
         </div>
@@ -216,19 +245,7 @@ function FormServico() {
           />
         </div>
 
-        {/* Modalidade */}
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold">Modalidade</label>
-          <input
-            type="text"
-            name="modalidade"
-            required
-            placeholder="Ex: Jiu-Jitsu, Crossfit..."
-            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
-            value={servico.modalidade || ""}
-            onChange={atualizarEstado}
-          />
-        </div>
+        
 
         {/* Categoria */}
         <div className="flex flex-col gap-2">
