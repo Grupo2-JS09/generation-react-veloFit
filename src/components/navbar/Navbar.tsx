@@ -2,7 +2,7 @@
 import { useContext, useState, useEffect, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { ToastAlerta } from "../../utils/ToastAlerta";
+import { ToastAlerta } from "../utils/ToastAlerta";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function Navbar() {
   function logout() {
     handleLogout();
     ToastAlerta("Usuário deslogado com sucesso!", "sucesso");
-    navigate("/");
+    navigate('/');
   }
 
   // Fecha o menu ao clicar fora
@@ -29,7 +29,7 @@ function Navbar() {
 
   let component: ReactNode;
 
-  if (usuario.token !== "") {
+  if(usuario.token !== "") {
     component = (
       <nav className="bg-[var(--jet)] py-4 px-8 fixed top-0 left-0 right-0 z-50 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
@@ -120,10 +120,14 @@ function Navbar() {
           </div>
         </div>
       </nav>
-    );
+    )
   }
 
-  return <>{component}</>;
+  return (
+    <>
+      {component}
+    </>
+  );
 }
 
 export default Navbar;

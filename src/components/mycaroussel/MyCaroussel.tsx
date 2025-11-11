@@ -11,7 +11,7 @@ interface CarouselProps {
 
 const MyCaroussel: React.FC<CarouselProps> = ({ items }) => {
   return (
-    <div className="relative max-w-xl mx-auto w-full">
+    <div className="relative  sm:max-w-2xl md:max-w-4xl mx-auto w-full">
       <Swiper
         // Instala os módulos que vamos usar
         modules={[Navigation, Pagination, A11y]}
@@ -20,7 +20,7 @@ const MyCaroussel: React.FC<CarouselProps> = ({ items }) => {
         navigation
         pagination={{ clickable: true }}
         loop={true}
-        className=" aspect-video md:max-w-xl " // Exemplo de classe Tailwind
+        className=" aspect-video  " // Exemplo de classe Tailwind
       >
         {items.map((url, index) => (
           <SwiperSlide key={index}>
