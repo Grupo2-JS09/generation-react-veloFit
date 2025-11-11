@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useContext, useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import type UsuarioLogin from "../models/UsuarioLogin";
@@ -16,8 +16,7 @@ function Login() {
   useEffect(() => {
     if (usuario.token !== "") {
       navigate("/home");
-      alert('AEE !')
-      ToastAlerta('AEE !', 'sucess')
+      ToastAlerta(`Seja bem-vindo ${usuario.nome}`, 'sucess')
     }
   }, [usuario]);
 

@@ -10,6 +10,9 @@ import ListaServico from "./components/servico/listaservico/ListaServico";
 import { AuthProvider } from "./contexts/AuthContext";
 import Cadastro from "./pages/Cadastro";
 import About from "./pages/About";
+import { ToastContainer } from "react-toastify";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 export function App() {
   return (
