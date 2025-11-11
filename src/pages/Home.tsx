@@ -1,6 +1,7 @@
 import img1 from "../assets/imagenscaroussel/esteira.jpg";
 import img2 from "../assets/imagenscaroussel/img3.jpg";
 import img3 from "../assets/imagenscaroussel/tenis.jpg";
+import ListaCards from "../components/listacards/ListaCards";
 
 import MyCaroussel from "../components/mycaroussel/MyCaroussel";
 export default function Home() {
@@ -22,12 +23,12 @@ export default function Home() {
               </p>
             </div>
             <div className="flex gap-4">
-              <button className="cad-button px-6 py-2 bg-(--tomato) text-white border-2 border-[#f06543] rounded font-semibold hover:bg-[#e05738] hover:border-[#e05738] hover:scale-105 transition-all duration-300">
-                Começar Agora
-              </button>
-              <button className="l-button px-6 py-2 bg-transparent text-white border-2 border-white rounded font-semibold hover:bg-white hover:text-[#2c302e] transition-all duration-300">
-                Login
-              </button>
+              <a href="#cards" className="smooth">
+                <button className="cad-button px-6 py-2 bg-(--tomato) text-white border-2 border-[#f06543] rounded font-semibold hover:bg-[#e05738] hover:border-[#e05738] hover:scale-105 transition-all duration-300">
+                  Saiba Mais
+                </button>
+              </a>
+              
             </div>
           </div>
         </div>
@@ -35,6 +36,10 @@ export default function Home() {
           <MyCaroussel items={images} />
         </div>
       </div>
+
+      <section id="cards">
+        <ListaCards />
+      </section>
     </>
   );
 }
