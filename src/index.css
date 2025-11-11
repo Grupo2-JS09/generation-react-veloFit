@@ -30,3 +30,13 @@
   isolation: isolate;
 }
 
+/* alterar cores das setas do banner */
+.swiper-button-prev,
+.swiper-button-next {
+  /* Ex: Mudar a cor da seta para a sua cor 'tomato' */
+  color: var(--tomato) !important; /* Usamos a cor que você definiu */
+  padding: 5px;
+  background-color: var(--jet);
+  padding: 15px;
+  border-radius: 50%;
+}

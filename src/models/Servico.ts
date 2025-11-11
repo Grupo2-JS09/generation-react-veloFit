@@ -5,8 +5,8 @@ export default interface Servico {
   id: number;
   valor_mensalidade: number;
   frequencia: number;
-  dt_matricula: string;
+  dt_matricula: Date;
   modalidade: string;
   usuario: Usuario | null;
-  categoria: Categoria | null;
+  categoria: Categoria;
 }
