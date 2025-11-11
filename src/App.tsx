@@ -21,7 +21,7 @@ export function App() {
         <ToastContainer/>
         <BrowserRouter>
           <Navbar />
-          <div className="min-h-[80vh] py-20">
+          <div className="min-h-[80vh]">
             <Routes>
               <Route path='/home' element={<Home />} />
               <Route path='/' element={<Login />} />
