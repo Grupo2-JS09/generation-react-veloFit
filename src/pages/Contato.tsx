@@ -16,7 +16,7 @@ function Contato() {
   const integrantes: Integrante[] = [
     {
       nome: "Anna Clara",
-      github: "https://github.com/",
+      github: "https://github.com/andradeannac",
       linkedin: "https://linkedin.com/in/andradeannac",
       foto: "https://avatars.githubusercontent.com/u/109049321?v=4",
       email: "mailto: andradeannac@gmail.com",
@@ -26,7 +26,7 @@ function Contato() {
       github: "https://github.com/BennerDias",
       linkedin: "https://linkedin.com/in/BennerDias",
       foto: "https://avatars.githubusercontent.com/u/183029242?v=4",
-      email: "mailto:",
+      email: "mailto: bennerdias.dev@gmail.com",
     },
     {
       nome: "Elzilane Barreto",
@@ -47,7 +47,7 @@ function Contato() {
       github: "https://github.com/MateusHeloi",
       linkedin: "https://linkedin.com/in/mateus-heloi",
       foto: "https://avatars.githubusercontent.com/u/110264142?v=4",
-      email: "mailto: ",
+      email: "mailto: heloimateus@gmail.com",
     },
     {
       nome: "Paulo Henrique",
