@@ -13,13 +13,14 @@ const MyCaroussel: React.FC<CarouselProps> = ({ items }) => {
   return (
     <div className="  sm:max-w-2xl md:max-w-4xl mx-auto w-full">
       <Swiper
+        // Instala os módulos que vamos usar
         modules={[Navigation, Pagination, A11y]}
         spaceBetween={50}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
         loop={true}
-        className="" 
+        className="   " // Exemplo de classe Tailwind
       >
         {items.map((url, index) => (
           <SwiperSlide key={index}>

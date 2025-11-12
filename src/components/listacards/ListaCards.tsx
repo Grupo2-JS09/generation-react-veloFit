@@ -1,53 +1,70 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import type Servico from "../../models/Servico";
-import { buscar } from "../../services/Service";
 import Cards from "../cards/Cards";
-import { ToastAlerta } from "../utils/ToastAlerta";
 
 function ListaCards() {
-
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
-  const [servicos, setServicos] = useState<Servico[]>([]);
-
-  async function buscarServicos() {
-    try {
-      await buscar("/servicos", setServicos, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-        ToastAlerta("Sessão expirada. Faça login novamente!", "info");
-      }
-    }
-  }
-
-  useEffect(() => {
-    buscarServicos();
-  }, []);
-
-
   return (
-    <div className="w-full bg-gray-400 py-10 px-6">
-      <h2 className="text-white text-3xl text-center mb-10">Promoções</h2>
+    <div className="w-full bg-white py-10 px-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
-        {servicos.map((servico, index) => (
-          <Cards
-            key={servico.id}
-            recomendado={index % 2 === 0}
-            precoAntigo="R$ 310.00"
-            servico={servico}
-            descricaoPreco="por mês"
-            beneficios={[
-              { texto: "Treine em todas as unidades", disponivel: true },
-              { texto: "Acesso a todas as aulas coletivas", disponivel: true },
-              { texto: "Sem taxa de matrícula", disponivel: true },
-              { texto: "Sem taxa de anuidade", disponivel: true },
-            ]}
-          />
-        ))}
+        <Cards
+          recomendado
+          nome="Gold Pro Fidelidade"
+          precoAntigo="R$ 159,90"
+          preco="R$ 8,59"
+          descricaoPreco="No 1º mês"
+          beneficios={[
+            { texto: "Treine em todas as unidades", disponivel: true },
+            { texto: "Acesso a todas as aulas coletivas", disponivel: true },
+            { texto: "Leve 5 amigos para treinar com você", disponivel: true },
+            { texto: "Sem taxa de matrícula", disponivel: true },
+            { texto: "Sem taxa de anuidade", disponivel: true },
+            { texto: "Fidelidade de 12 meses", disponivel: true },
+          ]}
+        />
+
+        <Cards
+          nome="Gold Premium"
+          preco="R$ 184,90"
+          descricaoPreco="por mês"
+          beneficios={[
+            { texto: "Treine em todas as unidades", disponivel: true },
+            { texto: "Acesso a todas as aulas coletivas", disponivel: true },
+            { texto: "Leve 5 amigos para treinar com você", disponivel: false },
+            { texto: "Sem taxa de matrícula", disponivel: true },
+            { texto: "Sem taxa de anuidade", disponivel: true },
+            { texto: "Sem fidelidade", disponivel: true },
+          ]}
+        />
+
+        <Cards
+          recomendado
+          nome="Gold Pro Plus Fidelidade"
+          precoAntigo="R$ 179,90"
+          preco="R$ 9,90"
+          descricaoPreco="No 1º mês"
+          beneficios={[
+            { texto: "Treine em todas as unidades", disponivel: true },
+            { texto: "Acesso a todas as aulas coletivas", disponivel: true },
+            { texto: "Leve 5 amigos para treinar com você", disponivel: true },
+            { texto: "Sem taxa de matrícula", disponivel: true },
+            { texto: "Sem taxa de anuidade", disponivel: true },
+            { texto: "Fidelidade de 12 meses", disponivel: true },
+            { texto: "Bioimpedância (1 avaliação por mês)", disponivel: true },
+          ]}
+        />
+
+        <Cards
+          nome="Gold Premium Plus"
+          preco="R$ 204,90"
+          descricaoPreco="por mês"
+          beneficios={[
+            { texto: "Treine em todas as unidades", disponivel: true },
+            { texto: "Acesso a todas as aulas coletivas", disponivel: true },
+            { texto: "Leve 5 amigos para treinar com você", disponivel: false },
+            { texto: "Sem taxa de matrícula", disponivel: true },
+            { texto: "Sem taxa de anuidade", disponivel: true },
+            { texto: "Sem fidelidade", disponivel: true },
+            { texto: "Bioimpedância (1 avaliação por mês)", disponivel: true },
+          ]}
+        />
       </div>
     </div>
   );

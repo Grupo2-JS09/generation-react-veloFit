@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 import type Categoria from "../../../models/Categoria";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function FormCategoria() {
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ function FormCategoria() {
 
     if (id !== undefined) {
       try {
-        await atualizar(`/categorias/atualizar`, categoria, setCategoria, {
+        await atualizar(`/categorias`, categoria, setCategoria, {
           headers: {
             Authorization: token,
           },
@@ -97,58 +97,49 @@ function FormCategoria() {
   }
 
   return (
-    <div className='relative min-h-screen  text-white flex flex-col items-center py-10 px-6'>
-      
-      <div className='absolute inset-0 bg-[url("https://www.tendaatacado.com.br/dicas/wp-content/uploads/2022/06/exercicio-para-fazer-de-manha-topo.jpg")] bg-cover bg-center filter grayscale'></div>
-      
-      <div className="absolute inset-0 bg-black/40"></div>
-      
-      <div className="relative z-10">
+    <div className='min-h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6'>
+      <h1 className='flex flex-col items-center py-10 px-6 text-3xl font-bold'>
+        {id === undefined ? "Cadastrar Categoria" : "Editar Categoria"}
+      </h1>
 
-        <h1 className='flex flex-col items-center py-10 px-6 text-3xl font-bold'>
-          {id === undefined ? "Cadastrar Categoria" : "Editar Categoria"}
-        </h1>
+      <form
+        onSubmit={gerarNovaCategoria}
+        className='bg-slate-800/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700'
+      >
+        <div className='flex flex-col gap-2'>
+          <label htmlFor='nome_categoria' className='block mb-2 text-sm font-semibold'>
+            Nome da Categoria
+          </label>
+          <input
+            type='text'
+            name='nome_categoria'
+            id='nome_categoria'
+            placeholder='Digite o nome da categoria'
+            className='border border-slate-600 bg-slate-900 rounded-lg p-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500'
+            value={categoria.nome_categoria}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+          />
+        </div>
 
-        <form
-          onSubmit={gerarNovaCategoria}
-          className='bg-(--ferngreen)/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-(--jet)'
+        <button
+          type='submit'
+          className='w-full py-3 rounded-lg font-semibold text-white bg-orange-500 hover:bg-orange-600 transition flex justify-center items-center gap-2'
         >
-          <div className='flex flex-col gap-2'>
-            <label htmlFor='nome_categoria' className='block mb-2 text-sm font-semibold'>
-              Nome da Categoria
-            </label>
-            <input
-              type='text'
-              name='nome_categoria'
-              id='nome_categoria'
-              placeholder='Digite o nome da categoria'
-              className='border border-(--ferngreen) bg-(--jet) rounded-lg p-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-(--tomato)'
-              value={categoria.nome_categoria}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            />
-          </div>
+          {isLoading ? (
+            <ClipLoader color='#ffffff' size={22} />
+          ) : (
+            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
+          )}
+        </button>
 
-          <button
-            type='submit'
-            className='w-full py-3 rounded-lg font-semibold text-white bg-(--tomato) hover:bg-(--jet)/60 transition flex justify-center items-center gap-2'
-          >
-            {isLoading ? (
-              <ClipLoader color='#ffffff' size={22} />
-            ) : (
-              <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
-            )}
-          </button>
-
-          <button
-            type='button'
-            onClick={retornar}
-            className='w-full py-3 rounded-lg font-semibold text-slate-300 hover:bg-white/60 hover:text-[#2c302e] transition'
-          >
-            Voltar
-          </button>
-        </form>
-      </div>
-
+        <button
+          type='button'
+          onClick={retornar}
+          className='w-full py-3 rounded-lg font-semibold text-slate-300 hover:text-white hover:bg-slate-700 transition'
+        >
+          Voltar
+        </button>
+      </form>
     </div>
   );
 }
