@@ -122,7 +122,7 @@ function FormServico() {
     const payload: Servico = {
       ...servico,
       categoria: categoria,
-      usuario: usuarioSelecionado, // 👈 vinculamos o selecionado
+      usuario: usuarioSelecionado, 
     };
 
     try {
@@ -145,7 +145,7 @@ function FormServico() {
         ToastAlerta("Erro ao salvar o serviço", "erro");
       }
     }
-
+    console.log(servico)
     setIsLoading(false);
     retornar();
   }
@@ -153,13 +153,13 @@ function FormServico() {
   const carregandoCategoria = categoria.nome_categoria === "";
 
   return (
-    <div className="bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6">
-      <h1 className="text-3xl font-bold mb-6">
+      <div className="flex flex-col text-white items-center py-20 px-6 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center filter grayscale">
+      <h1 className="text-4xl font-bold mb-6 text-black">
         {id !== undefined ? "Editar Serviço" : "Cadastrar Serviço"}
       </h1>
 
       <form
-        className="bg-slate-800/60 rounded-2xl mb-15 shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700"
+        className="bg-slate-800/60 rounded-2xl mb-15 shadow-lg p-8 w-full max-w-md flex flex-col mt-5 gap-6 border border-slate-700"
         onSubmit={gerarNovoServico}
       >
         {/* Usuário contratante */}
@@ -177,7 +177,7 @@ function FormServico() {
               setUsuarioSelecionado(usuarioSelecionado || null);
             }}
           >
-            <option value="">Selecione o usuário...</option>
+            <option  value="">Selecione o usuário...</option>
             {usuarios.map((u) => (
               <option key={u.id} value={u.id}>
                 {u.nome} ({u.usuario})
@@ -279,7 +279,7 @@ function FormServico() {
           )}
         </button>
       </form>
-    </div>
+      </div>
   );
 }
 

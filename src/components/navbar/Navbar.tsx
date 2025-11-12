@@ -16,7 +16,6 @@ function Navbar() {
     navigate('/');
   }
 
-  // Fecha o menu ao clicar fora
   useEffect(() => {
     function handleClickFora(event: MouseEvent) {
       const target = event.target as HTMLElement;
@@ -86,7 +85,7 @@ function Navbar() {
             <img
               onClick={() => setMenuAberto(!menuAberto)}
               className="rounded-full size-12 cursor-pointer hover:scale-105 transition-transform duration-300"
-              src={usuario.foto}
+              src={usuario.foto || 'https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png'}
               alt={usuario.nome}
             />
             <p className="text-sm">{usuario.nome}</p>

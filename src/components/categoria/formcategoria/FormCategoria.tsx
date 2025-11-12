@@ -111,7 +111,7 @@ function FormCategoria() {
 
         <form
           onSubmit={gerarNovaCategoria}
-          className='bg-(--ferngreen)/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-(--jet)'
+          className='bg-(--jet)/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-(--jet)'
         >
           <div className='flex flex-col gap-2'>
             <label htmlFor='nome_categoria' className='block mb-2 text-sm font-semibold'>
@@ -130,7 +130,7 @@ function FormCategoria() {
 
           <button
             type='submit'
-            className='w-full py-3 rounded-lg font-semibold text-white bg-(--tomato) hover:bg-(--jet)/60 transition flex justify-center items-center gap-2'
+            className='w-full py-3 rounded-lg font-semibold text-white bg-(--tomato) hover:bg-orange-600 transition flex justify-center items-center gap-2'
           >
             {isLoading ? (
               <ClipLoader color='#ffffff' size={22} />
@@ -142,7 +142,7 @@ function FormCategoria() {
           <button
             type='button'
             onClick={retornar}
-            className='w-full py-3 rounded-lg font-semibold text-slate-300 hover:bg-white/60 hover:text-[#2c302e] transition'
+            className='w-full py-3 rounded-lg font-semibold text-slate-300 hover:bg-white/60 hover:text-[#2c302e] border transition'
           >
             Voltar
           </button>

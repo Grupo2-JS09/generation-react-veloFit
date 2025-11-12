@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Servico from "../../../models/Servico";
 import { buscar } from "../../../services/Service";
@@ -10,11 +10,9 @@ interface CardServicosProps {
 
 function CardServicos({ servico }: CardServicosProps) {
   const { usuario } = useContext(AuthContext);
+  const token = usuario.token;
   const [valorMensalidade, setValorMensalidade] = useState<number | null>(null);
 
-  const token = usuario.token;
-
-  const { id } = useParams<{ id: string }>();
 
   async function desconto() {
     try {
@@ -38,7 +36,7 @@ function CardServicos({ servico }: CardServicosProps) {
     <div className="flex flex-col bg-[#242d25] items-center rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition duration-300 w-80">
       <div className="flex w-full py-3 px-6 items-center gap-4 border-b border-orange-400">
         <img
-          src={servico.usuario?.foto}
+          src={servico.usuario?.foto || 'https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png'}
           className="h-14 w-14 rounded-full object-cover border-2 border-orange-400"
         />
         <h3 className="text-xl font-bold uppercase text-orange-400">

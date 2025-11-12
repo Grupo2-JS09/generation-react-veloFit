@@ -51,7 +51,7 @@ function ListaServicos() {
       <div className="relative z-10 flex flex-col items-center pt-10">
         {isLoading && (
           <div className="flex justify-center w-full my-8">
-            <SyncLoader color="#283a2b" size={32} />
+            <SyncLoader color="#9ae19d" size={32} />
           </div>
         )}
 

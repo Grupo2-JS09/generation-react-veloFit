@@ -58,7 +58,7 @@ function ListaCategoria() {
         <div className="absolute inset-0 bg-black/40"></div>
 
         <div className="relative z-10 flex flex-col items-center min-h-screen py-10 px-6">
-          <h1 className="text-4xl font-bold mb-12 text-center tracking-tight">
+          <h1 className="text-5xl font-bold mb-12 text-center tracking-tight">
             Categorias
           </h1>
 
@@ -78,7 +78,7 @@ function ListaCategoria() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full max-w-6xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-6xl">
             {categorias.map((categoria) => (
               <CardCategoria key={categoria.id} categoria={categoria} />
             ))}

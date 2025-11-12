@@ -10,7 +10,7 @@ import {
   Percent,
 } from "lucide-react";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { ToastAlerta } from "../components/utils/ToastAlerta";
 
@@ -242,36 +242,7 @@ function About() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-[#2C302E]/70 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-[#537A5A]/30 shadow-lg">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <Shield className="w-12 h-12 text-[#9AE19D]" />
-            <h2 className="text-3xl font-bold text-center text-[#9AE19D]">
-              Segurança & LGPD
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div className="p-4">
-              <h3 className="text-xl font-bold text-[#F06543] mb-2">BCrypt</h3>
-              <p className="text-[#F9E0D9]">
-                Criptografia robusta para suas senhas
-              </p>
-            </div>
-            <div className="p-4">
-              <h3 className="text-xl font-bold text-[#F06543] mb-2">JWT</h3>
-              <p className="text-[#F9E0D9]">Sessões seguras e login ativo</p>
-            </div>
-            <div className="p-4">
-              <h3 className="text-xl font-bold text-[#F06543] mb-2">
-                Passport
-              </h3>
-              <p className="text-[#F9E0D9]">
-                Autenticação validada e gerenciada
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-32">
         <div className="text-center">
@@ -281,9 +252,11 @@ function About() {
           <p className="text-xl text-[#F9E0D9] mb-8">
             Junte-se ao VeloFit e transforme sua experiência fitness
           </p>
-          <button className="bg-[#F06543] hover:bg-[#e05738] text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105 shadow-lg">
-            Começar Agora
-          </button>
+          <Link to='/servicos'>
+            <button className="bg-[#F06543] hover:bg-[#e05738] text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105 shadow-lg">
+              Começar Agora
+            </button>
+          </Link>
         </div>
       </div>
     </div>

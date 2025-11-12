@@ -35,13 +35,6 @@ export default function Cadastro() {
       }
     }
 
-    if (!foto.trim()) {
-      novosErros.foto = "⚠️ Campo obrigatório.";
-    } else if (!/^https?:\/\/.+/i.test(foto)) {
-      novosErros.foto =
-        "❌ Insira uma URL válida (deve começar com http ou https).";
-    }
-
     if (!senha.trim()) {
       novosErros.senha = "⚠️ Campo obrigatório.";
     } else {
@@ -96,7 +89,7 @@ export default function Cadastro() {
 
   return (
     <div
-      className="h-screen w-full flex bg-gradient-to-br from-gray-900 via-emerald-900/30 to-gray-900 relative overflow-x-hidden overflow-y-hidden"
+      className="min-h-screen w-full flex bg-gradient-to-br from-gray-900 via-emerald-900/30 to-gray-900 relative overflow-x-hidden overflow-y-hidden"
       style={{ backgroundColor: "#0f172a" }}
     >
       {/* Fundos decorativos */}

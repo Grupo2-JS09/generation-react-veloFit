@@ -1,8 +1,11 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
+// @ts-ignore
 import "swiper/css";
+// @ts-ignore
 import "swiper/css/navigation";
+// @ts-ignore
 import "swiper/css/pagination";
 
 interface CarouselProps {

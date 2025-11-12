@@ -1,4 +1,4 @@
-import React, { useContext, useState, type FormEvent } from "react";
+import { useContext, useState, type FormEvent } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import type Usuario from "../models/Usuario";
 import { atualizar } from "../services/Service";
@@ -38,7 +38,6 @@ function Perfil() {
 
     if (!checagemSenha()) return;
 
-    // se o campo de senha estiver vazio, mantém a senha atual
     const senhaFinal = senha === "" ? usuario.senha : senha;
 
     const usuarioAtualizado: Usuario = {
@@ -79,9 +78,9 @@ function Perfil() {
         </h2>
 
         {/* preview da foto */}
-        <div className="relative">
+        <div className="relative ">
           <img
-            src={foto}
+            src={foto || 'https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png'}
             alt={nome}
             className="w-28 h-28 rounded-full object-cover border-4 border-[var(--celadon)] shadow-lg"
           />
@@ -110,7 +109,7 @@ function Perfil() {
             </label>
             <input
               type="text"
-              value={foto}
+              value={foto || 'https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png'}
               onChange={(e) => setFoto(e.target.value)}
               className="w-full p-3 rounded-xl bg-[rgba(255,255,255,0.1)] border border-[var(--celadon)] text-white focus:outline-none focus:ring-2 focus:ring-[var(--celadon)]"
             />
@@ -130,13 +129,13 @@ function Perfil() {
 
           <div>
             <label className="block mb-1 text-sm text-[var(--mistyrose)]">
-              Nova Senha (opcional)
+              Nova Senha
             </label>
             <input
               type="password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
-              placeholder="Deixe em branco para manter a atual"
+              placeholder=""
               className="w-full p-3 rounded-xl bg-[rgba(255,255,255,0.1)] border border-[var(--celadon)] text-white focus:outline-none focus:ring-2 focus:ring-[var(--celadon)]"
             />
           </div>
@@ -149,7 +148,7 @@ function Perfil() {
               type="password"
               value={confirmarSenha}
               onChange={(e) => setConfirmarSenha(e.target.value)}
-              placeholder="Deixe em branco para manter a atual"
+              placeholder=""
               className="w-full p-3 rounded-xl bg-[rgba(255,255,255,0.1)] border border-[var(--celadon)] text-white focus:outline-none focus:ring-2 focus:ring-[var(--celadon)]"
             />
           </div>

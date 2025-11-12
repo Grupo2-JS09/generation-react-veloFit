@@ -1,10 +1,12 @@
 import { CheckCircle, XCircle } from "lucide-react";
 import type Servico from "../../models/Servico";
 import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { buscar } from "../../services/Service";
+import { AuthContext } from "../../contexts/AuthContext";
 
 interface CardsProps {
   recomendado?: boolean;
-  precoAntigo?: string;
   descricaoPreco?: string;
   beneficios: { texto: string; disponivel: boolean }[];
   destaque?: boolean;
@@ -13,11 +15,32 @@ interface CardsProps {
 
 function Cards({
   recomendado = false,
-  precoAntigo,
   descricaoPreco,
   beneficios,
   servico
 }: CardsProps) {
+  const { usuario } = useContext(AuthContext);
+  const token = usuario.token;
+  const [valorMensalidade, setValorMensalidade] = useState<number | null>(null);
+
+  async function desconto() {
+    try {
+      await buscar(
+        `/servicos/calculo_mensalidade/${servico.id}`,
+        setValorMensalidade,
+        {
+          headers: { Authorization: token },
+        }
+      );
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    desconto();
+  }, [servico.id]);
+  
   return (
     <div
       className={`relative flex flex-col justify-between rounded-2xl p-6 w-full max-w-sm transition-all duration-300 border border-transparent 
@@ -33,13 +56,13 @@ function Cards({
         <h2 className="text-sm font-bold uppercase opacity-80">PLANO</h2>
         <h1 className="text-2xl font-bold mb-2">{servico.modalidade}</h1>
 
-        {precoAntigo && (
+        {servico.valor_mensalidade && (
           <p className="line-through text-sm opacity-70">
-            de {precoAntigo} por
+            de {servico.valor_mensalidade} por
           </p>
         )}
         <p className="text-4xl font-extrabold mt-1">
-          {servico.valor_mensalidade?.toLocaleString("pt-BR", {
+          {valorMensalidade?.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           })}

@@ -22,7 +22,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     nome: "",
     usuario: "",
     senha: "",
-    foto: "",
+    foto: "https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png",
     token: "",
   });
 

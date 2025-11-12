@@ -7,7 +7,7 @@ import { ToastAlerta } from "../components/utils/ToastAlerta";
 function Login() {
   const navigate = useNavigate();
 
-  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
+  const { usuario, handleLogin } = useContext(AuthContext);
 
   const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
     {} as UsuarioLogin

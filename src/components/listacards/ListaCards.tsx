@@ -37,7 +37,6 @@ function ListaCards() {
           <Cards
             key={servico.id}
             recomendado={index % 2 === 0}
-            precoAntigo="R$ 310.00"
             servico={servico}
             descricaoPreco="por mês"
             beneficios={[

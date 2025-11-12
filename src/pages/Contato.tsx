@@ -65,7 +65,7 @@ function Contato() {
     },
   ];
   return (
-    <div className="min-h-screen bg-linear-to-b from-[#283a2b] via-[#4fd1c5] to-[#aee9b1] text-white">
+    <div className="min-h-screen bg-[url('https://img.wattpad.com/c0a7a1c1767fb4085a02d30b3c07f996f89671ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f307244724276586936614c344f773d3d2d3531353434333836382e313530353633303935616662376362393234323934363438383234312e676966')] bg-cover bg-center bg-no-repeat text-white">
       <div className="flex flex-col items-center justify-center min-h-screen py-10 px-6">
         <h1 className="text-5xl lg:text-6xl font-bold text-orange-400 mb-6 tracking-tight">
           Integrantes do Projeto
@@ -75,7 +75,7 @@ function Contato() {
           {integrantes.slice(0, 4).map((i) => (
             <div
               key={i.nome}
-              className="group flex flex-col items-center bg-[#283a2b] bg-opacity-70 rounded-2xl shadow-lg p-6 w-56 hover:bg-[#bd4e32] hover:scale-105 transition duration-300"
+              className="group flex flex-col items-center bg-transparent shadow-[0_0_40px_rgba(0,0,0,0.8)] rounded-2xl p-6 w-56 hover:bg-[#bd4e32] hover:scale-105 transition duration-300 "
             >
               <img
                 src={i.foto}
@@ -119,7 +119,7 @@ function Contato() {
           {integrantes.slice(4).map((i) => (
             <div
               key={i.nome}
-              className="group flex flex-col items-center bg-[#283a2b] bg-opacity-70 rounded-2xl shadow-lg p-6 w-56 hover:bg-[#bd4e32] hover:scale-105 transition duration-300"
+              className="group flex flex-col items-center bg-transparent shadow-[0_0_40px_rgba(0,0,0,0.8)] rounded-2xl p-6 w-56 hover:bg-[#bd4e32] hover:scale-105 transition duration-300 "
             >
               <img
                 src={i.foto}
