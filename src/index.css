@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-* {
+*{
   font-family: "Rubik", sans-serif;
 }
 
@@ -43,8 +43,4 @@
   background-color: var(--jet);
   padding: 15px;
   border-radius: 50%;
-}
-
-html {
-  scroll-behavior: smooth;
 }

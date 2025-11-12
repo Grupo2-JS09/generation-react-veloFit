@@ -33,6 +33,7 @@ function Navbar() {
     component = (
       <nav className="bg-[var(--jet)] py-4 px-8 sticky top-0 left-0 right-0 z-50 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
+          {/* Logo */}
           <div className="w-10 h-10 bg-[var(--celadon)] rounded-full flex items-center justify-center">
             <Link to="/home">
               <img
@@ -43,6 +44,7 @@ function Navbar() {
             </Link>
           </div>
 
+          {/* Links principais */}
           <ul className="hidden md:flex gap-10 list-none m-0 p-0">
             <li>
               <Link
@@ -99,6 +101,13 @@ function Navbar() {
                   onClick={() => setMenuAberto(false)}
                 >
                   Meu Perfil
+                </Link>
+                <Link
+                  to="/configuracoes"
+                  className="text-white hover:text-[var(--celadon)] transition"
+                  onClick={() => setMenuAberto(false)}
+                >
+                  Configurações
                 </Link>
                 <button
                   onClick={logout}
