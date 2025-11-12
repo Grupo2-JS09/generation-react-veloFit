@@ -65,9 +65,9 @@ function Contato() {
     },
   ];
   return (
-    <div className="min-h-screen bg-[url('https://img.wattpad.com/c0a7a1c1767fb4085a02d30b3c07f996f89671ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f307244724276586936614c344f773d3d2d3531353434333836382e313530353633303935616662376362393234323934363438383234312e676966')] bg-cover bg-center bg-no-repeat text-white">
+    <div className="min-h-screen bg-[url('https://img.wattpad.com/c0a7a1c1767fb4085a02d30b3c07f996f89671ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f307244724276586936614c344f773d3d2d3531353434333836382e313530353633303935616662376362393234323934363438383234312e676966')] bg-cover bg-center bg-no-repeat text-white absolute inset-0 ">
       <div className="flex flex-col items-center justify-center min-h-screen py-10 px-6">
-        <h1 className="text-5xl lg:text-6xl font-bold text-orange-400 mb-6 tracking-tight">
+        <h1 className="text-5xl lg:text-6xl font-bold text-(--tomato) mb-6 tracking-tight">
           Integrantes do Projeto
         </h1>
 
@@ -82,15 +82,15 @@ function Contato() {
                 alt={i.nome}
                 className="w-28 h-28 rounded-full object-cover mb-4 border-2 border-orange-400 group-hover:border-[#283a2b] shadow-md hover:border-orange-300 transition"
               />
-              <span className="text-lg text-orange-400 group-hover:text-[#283a2b] hover:text-orange-300 font-semibold mb-2 text-center">
+              <span className="text-lg text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 font-semibold mb-2 text-center">
                 {i.nome}
               </span>
-              <div className="flex space-x-5 mt-2">
+              <div className="flex space-x-5 mt-2 ">
                 <a
                   href={i.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 group-hover:text-[#283a2b] hover:text-orange-300 transition"
+                  className="text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 transition"
                 >
                   <GithubLogoIcon size={26} weight="fill" />
                 </a>
@@ -98,7 +98,7 @@ function Contato() {
                   href={i.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 group-hover:text-[#283a2b] hover:text-orange-300 transition"
+                  className="text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 transition"
                 >
                   <LinkedinLogoIcon size={26} weight="fill" />
                 </a>
@@ -106,7 +106,7 @@ function Contato() {
                   href={i.email}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 group-hover:text-[#283a2b] hover:text-orange-300 transition"
+                  className="text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 transition"
                 >
                   <EnvelopeIcon size={28} weight="regular" />
                 </a>
@@ -126,7 +126,7 @@ function Contato() {
                 alt={i.nome}
                 className="w-28 h-28 rounded-full object-cover mb-4 border-2 border-orange-400 group-hover:border-[#283a2b] shadow-md hover:border-orange-300 transition"
               />
-              <span className="text-lg text-orange-400 group-hover:text-[#283a2b] hover:text-orange-300 font-semibold mb-2 text-center">
+              <span className="text-lg text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 font-semibold mb-2 text-center">
                 {i.nome}
               </span>
               <div className="flex space-x-5 mt-2">
@@ -134,7 +134,7 @@ function Contato() {
                   href={i.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 group-hover:text-[#283a2b] hover:text-orange-300 transition"
+                  className="text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 transition"
                 >
                   <GithubLogoIcon size={26} weight="fill" />
                 </a>
@@ -142,7 +142,7 @@ function Contato() {
                   href={i.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 group-hover:text-[#283a2b] hover:text-orange-300 transition"
+                  className="text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 transition"
                 >
                   <LinkedinLogoIcon size={26} weight="fill" />
                 </a>
@@ -150,7 +150,7 @@ function Contato() {
                   href={i.email}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 group-hover:text-[#283a2b] hover:text-orange-300 transition"
+                  className="text-(--jet) group-hover:text-[#283a2b] hover:text-orange-300 transition"
                 >
                   <EnvelopeIcon size={28} weight="regular" />
                 </a>
