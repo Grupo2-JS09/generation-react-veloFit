@@ -1,8 +1,8 @@
 import React, { useContext, useState, type FormEvent } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { ToastAlerta } from "../utils/ToastAlerta";
 import type Usuario from "../models/Usuario";
 import { atualizar } from "../services/Service";
+import { ToastAlerta } from "../components/utils/ToastAlerta";
 
 function Perfil() {
   const { usuario, handleLogout } = useContext(AuthContext);

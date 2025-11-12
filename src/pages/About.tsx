@@ -12,7 +12,7 @@ import {
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { ToastAlerta } from "../utils/ToastAlerta";
+import { ToastAlerta } from "../components/utils/ToastAlerta";
 
 function About() {
   const navigate = useNavigate();
