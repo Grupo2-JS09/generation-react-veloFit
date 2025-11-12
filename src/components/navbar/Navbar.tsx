@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useContext, useState, useEffect, type ReactNode } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ToastAlerta } from "../utils/ToastAlerta";
@@ -10,10 +10,11 @@ function Navbar() {
 
   const [menuAberto, setMenuAberto] = useState(false);
 
+
   function logout() {
     handleLogout();
     ToastAlerta("Usuário deslogado com sucesso!", "sucesso");
-    navigate('/');
+    navigate("/");
   }
 
   useEffect(() => {
@@ -28,10 +29,11 @@ function Navbar() {
 
   let component: ReactNode;
 
-  if(usuario.token !== "") {
+  if (usuario.token !== "") {
     component = (
       <nav className="bg-[var(--jet)] py-4 px-8 sticky top-0 left-0 right-0 z-50 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
+          {/* LOGO */}
           <div className="w-10 h-10 bg-[var(--celadon)] rounded-full flex items-center justify-center">
             <Link to="/home">
               <img
@@ -42,6 +44,7 @@ function Navbar() {
             </Link>
           </div>
 
+          {/* LINKS */}
           <ul className="hidden md:flex gap-10 list-none m-0 p-0">
             <li>
               <Link
@@ -67,7 +70,7 @@ function Navbar() {
                 className="text-white text-base font-medium hover:text-[var(--celadon)] transition-colors duration-300 relative group"
               >
                 Sobre
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[var(--celadon)] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-[-5px] w-0.5 bg-[var(--celadon)] group-hover:w-full transition-all duration-300"></span>
               </Link>
             </li>
             <li>
@@ -76,16 +79,20 @@ function Navbar() {
                 className="text-white text-base font-medium hover:text-[var(--celadon)] transition-colors duration-300 relative group"
               >
                 Contato
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[var(--celadon)] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 bottom-[-5px] w-0.5 bg-[var(--celadon)] group-hover:w-full transition-all duration-300"></span>
               </Link>
             </li>
           </ul>
 
+          {/* FOTO DE PERFIL + MENU */}
           <div className="relative menu-foto flex flex-col items-center text-white">
             <img
               onClick={() => setMenuAberto(!menuAberto)}
               className="rounded-full size-12 cursor-pointer hover:scale-105 transition-transform duration-300"
-              src={usuario.foto || 'https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png'}
+              src={
+                usuario.foto ||
+                "https://images.icon-icons.com/1378/PNG/512/avatardefault_92824.png"
+              }
               alt={usuario.nome}
             />
             <p className="text-sm">{usuario.nome}</p>
@@ -110,14 +117,10 @@ function Navbar() {
           </div>
         </div>
       </nav>
-    )
+    );
   }
 
-  return (
-    <>
-      {component}
-    </>
-  );
+  return <>{component}</>;
 }
 
 export default Navbar;

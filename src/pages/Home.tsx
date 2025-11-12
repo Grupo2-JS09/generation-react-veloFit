@@ -14,7 +14,7 @@ export default function Home() {
           <div className="w-1/2 flex flex-col gap-5 py-5">
             <div className="flex flex-col gap-6">
               <h1 className="text-3xl text-white font-bold sm:text-6xl ">
-                Torne Seu Corpo Com a{" "}
+                Transforme Seu Corpo Com a{" "}
                 <span className="text-(--tomato)">VeloFIT</span>
               </h1>
               <p className="text-white ">

@@ -31,7 +31,7 @@ function ListaCards() {
 
   return (
     <div className="w-full bg-gray-400 py-10 px-6">
-      <h2 className="text-white text-3xl text-center mb-10">Promoções</h2>
+      <h2 className="text-white text-4xl font-bold text-center mb-10">Promoções</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
         {servicos.map((servico, index) => (
           <Cards
