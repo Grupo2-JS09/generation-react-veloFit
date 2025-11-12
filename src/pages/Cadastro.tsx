@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { cadastrarUsuario } from "../services/Service";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
+  const navigate = useNavigate();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [foto, setFoto] = useState("");
@@ -9,39 +13,35 @@ export default function Cadastro() {
 
   const [erros, setErros] = useState<Record<string, string>>({});
   const [sucesso, setSucesso] = useState<string | null>(null);
+  const [carregando, setCarregando] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const novosErros: Record<string, string> = {};
     setSucesso(null);
 
-    // 🔹 Nome - mínimo de 3 letras
     if (!nome.trim()) {
       novosErros.nome = "⚠️ Campo obrigatório.";
     } else if (nome.trim().length < 3) {
       novosErros.nome = "❌ O nome deve ter pelo menos 3 letras.";
     }
 
-    // 🔹 E-mail - precisa ser válido e de domínio comum
     if (!email.trim()) {
       novosErros.email = "⚠️ Campo obrigatório.";
     } else {
-      const emailRegex =
-        /^[a-zA-Z0-9._%+-]+@(gmail|outlook|hotmail|yahoo|icloud|live)\.(com|com\.br)$/;
+      const emailRegex = /^[^@\s]+@[^@\s]+\.[cC][oO][mM]$/;
       if (!emailRegex.test(email)) {
-        novosErros.email =
-          "❌ Insira um e-mail válido (ex: usuario@gmail.com).";
+        novosErros.email = "❌ Insira um e-mail válido (ex: usuario@gmail.com).";
       }
     }
 
-    // 🔹 Foto de Perfil - deve começar com http ou https
     if (!foto.trim()) {
       novosErros.foto = "⚠️ Campo obrigatório.";
     } else if (!/^https?:\/\/.+/i.test(foto)) {
-      novosErros.foto = "❌ Insira uma URL válida (deve começar com http ou https).";
+      novosErros.foto =
+        "❌ Insira uma URL válida (deve começar com http ou https).";
     }
 
-    // 🔹 Senha - precisa ser forte
     if (!senha.trim()) {
       novosErros.senha = "⚠️ Campo obrigatório.";
     } else {
@@ -49,7 +49,6 @@ export default function Cadastro() {
       if (!senhaValida.ok) novosErros.senha = "❌ " + senhaValida.mensagem;
     }
 
-    // 🔹 Confirmar senha
     if (!confirmarSenha.trim()) {
       novosErros.confirmarSenha = "⚠️ Campo obrigatório.";
     } else if (senha !== confirmarSenha) {
@@ -59,7 +58,26 @@ export default function Cadastro() {
     setErros(novosErros);
 
     if (Object.keys(novosErros).length === 0) {
-      setSucesso("✅ Cadastro realizado com sucesso!");
+      setCarregando(true);
+      try {
+        const dadosUsuario = { nome, usuario: email, foto, senha };
+        await cadastrarUsuario("/usuarios/cadastrar", dadosUsuario, () => {
+          setSucesso("✅ Cadastro realizado com sucesso!");
+          setNome("");
+          setEmail("");
+          setFoto("");
+          setSenha("");
+          setConfirmarSenha("");
+          setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+
+        });
+      } catch {
+        setErros({ geral: "❌ Erro ao cadastrar usuário. Tente novamente." });
+      } finally {
+        setCarregando(false);
+      }
     }
   };
 
@@ -72,40 +90,45 @@ export default function Cadastro() {
     if (!/[0-9]/.test(senha))
       return { ok: false, mensagem: "Deve conter pelo menos um número." };
     if (!/[@$!%*?&]/.test(senha))
-      return {
-        ok: false,
-        mensagem: "Deve conter ao menos um caractere especial (@$!%*?&).",
-      };
+      return { ok: false, mensagem: "Deve conter ao menos um caractere especial (@$!%*?&)." };
     return { ok: true, mensagem: "" };
   }
 
   return (
-    <div className="min-h-screen w-full flex bg-gradient-to-br from-gray-900 via-emerald-900/40 to-gray-900 relative overflow-hidden">
-      {/* Fundos visuais suaves */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,140,0,0.15),_transparent_60%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(16,185,129,0.15),_transparent_60%)]"></div>
+    <div
+      className="h-screen w-full flex bg-gradient-to-br from-gray-900 via-emerald-900/30 to-gray-900 relative overflow-x-hidden overflow-y-hidden"
+      style={{ backgroundColor: "#0f172a" }}
+    >
+      {/* Fundos decorativos */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,140,0,0.12),_transparent_60%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(16,185,129,0.12),_transparent_60%)]"></div>
 
       <div className="relative flex flex-col lg:flex-row w-full backdrop-blur-[2px]">
         {/* LADO ESQUERDO */}
-        <div className="flex flex-col justify-center w-full lg:w-1/2 px-16 lg:px-28 py-24 text-white">
-          <div className="flex items-center gap-4 mb-12">
-            <div className="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
-              <span className="text-4xl font-bold">V</span>
-            </div>
-            <span className="text-4xl font-bold">VeloFit</span>
-          </div>
+        <div className="flex flex-col justify-center w-full lg:w-1/2 px-8 lg:px-12 py-6 text-white">
+         <div
+  className="w-24 h-24 rounded-xl flex items-center justify-center shadow-lg shadow-[var(--tomato)/20]"
+  style={{ backgroundColor: "var(--tomato)" }}
+>
+  <img
+    src="https://i.imgur.com/H6qOppX.png"
+    alt="VeloFit Logo"
+    className="w-16 h-16 object-contain"
+  />
+</div>
 
-          <h1 className="text-7xl font-extrabold mb-8 leading-tight tracking-tight">
+
+          <h1 className="text-4xl font-extrabold mb-4 leading-tight tracking-tight">
             Transforme seu corpo com{" "}
             <span className="text-orange-500">VeloFit</span>
           </h1>
 
-          <p className="text-gray-300 text-2xl mb-16 max-w-xl leading-relaxed">
+          <p className="text-gray-300 text-base mb-6 max-w-md leading-relaxed">
             Sistema completo de gestão para academias. Cadastre serviços,
             gerencie membros e impulsione seu negócio fitness.
           </p>
 
-          <div className="space-y-10">
+          <div className="space-y-4">
             <Feature
               icon="📊"
               title="Acompanhe Seu Progresso"
@@ -125,64 +148,37 @@ export default function Cadastro() {
         </div>
 
         {/* LADO DIREITO */}
-        <div className="flex w-full lg:w-1/2 items-center justify-center p-12">
-          <div className="w-full max-w-xl bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-12 rounded-3xl shadow-2xl">
-            <h2 className="text-5xl font-bold text-white mb-3">Criar Conta</h2>
-            <p className="text-gray-400 mb-10 text-2xl">
+        <div className="flex w-full lg:w-1/2 items-center justify-center p-6">
+          <div className="w-full max-w-sm bg-[var(--jet)] backdrop-blur-md border border-gray-700/40 p-6 rounded-2xl shadow-2xl">
+            <h2 className="text-3xl font-bold text-white mb-3">Criar Conta</h2>
+            <p className="text-gray-400 mb-6 text-base">
               Junte-se à comunidade VeloFit
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <Input
-                label="Nome Completo"
-                value={nome}
-                onChange={setNome}
-                placeholder="Digite seu nome completo"
-                erro={erros.nome}
-              />
-              <Input
-                label="Email"
-                type="email"
-                value={email}
-                onChange={setEmail}
-                placeholder="seu.email@gmail.com"
-                erro={erros.email}
-              />
-              <Input
-                label="Foto de Perfil"
-                value={foto}
-                onChange={setFoto}
-                placeholder="URL da sua foto (deve começar com http)"
-                erro={erros.foto}
-              />
-              <Input
-                label="Senha"
-                type="password"
-                value={senha}
-                onChange={setSenha}
-                placeholder="Crie uma senha forte"
-                erro={erros.senha}
-              />
-              <Input
-                label="Confirmar Senha"
-                type="password"
-                value={confirmarSenha}
-                onChange={setConfirmarSenha}
-                placeholder="Confirme sua senha"
-                erro={erros.confirmarSenha}
-              />
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <Input label="Nome Completo" value={nome} onChange={setNome} placeholder="Digite seu nome completo" erro={erros.nome} />
+              <Input label="Email" type="email" value={email} onChange={setEmail} placeholder="seu.email@gmail.com" erro={erros.email} />
+              <Input label="Foto de Perfil" value={foto} onChange={setFoto} placeholder="URL da sua foto" erro={erros.foto} />
+              <Input label="Senha" type="password" value={senha} onChange={setSenha} placeholder="Crie uma senha forte" erro={erros.senha} />
+              <Input label="Confirmar Senha" type="password" value={confirmarSenha} onChange={setConfirmarSenha} placeholder="Confirme sua senha" erro={erros.confirmarSenha} />
 
+              {erros.geral && (
+                <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3">
+                  <p className="text-red-400 text-sm">{erros.geral}</p>
+                </div>
+              )}
               {sucesso && (
-                <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-4">
-                  <p className="text-green-400 text-lg">{sucesso}</p>
+                <div className="bg-green-500/10 border border-green-500/50 rounded-lg p-3">
+                  <p className="text-green-400 text-sm">{sucesso}</p>
                 </div>
               )}
 
               <button
                 type="submit"
-                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-xl py-4 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20"
+                disabled={carregando}
+                className="w-full bg-[var(--tomato)] hover:bg-orange-600 text-white font-semibold text-base py-2.5 rounded-xl transition duration-200 shadow-lg shadow-orange-100/20 disabled:opacity-50"
               >
-                Cadastrar
+                {carregando ? "Cadastrando..." : "Cadastrar"}
               </button>
 
               <button
@@ -196,16 +192,19 @@ export default function Cadastro() {
                   setErros({});
                   setSucesso(null);
                 }}
-                className="w-full border border-gray-600 hover:bg-gray-700/50 text-gray-300 font-medium text-lg py-3.5 rounded-xl transition duration-200"
+                className="w-full border border-gray-600 hover:bg-gray-700/50 text-gray-300 font-medium text-sm py-2.5 rounded-xl transition duration-200"
               >
                 Limpar Formulário
               </button>
 
-              <p className="text-center text-gray-400 text-lg mt-6">
+              <p className="text-center text-gray-400 text-sm mt-3">
                 Já tem uma conta?{" "}
-                <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
-                  Fazer Login
-                </span>
+                <Link to="/login">
+                  <span className="text-orange-500 hover:text-orange-400 font-semibold cursor-pointer">
+                    Fazer Login
+                  </span>
+                </Link>
+             
               </p>
             </form>
           </div>
@@ -218,19 +217,17 @@ export default function Cadastro() {
 function Input({ label, value, onChange, placeholder, type = "text", erro }: any) {
   return (
     <div>
-      <label className="text-gray-300 text-lg font-medium mb-2 block">
-        {label}
-      </label>
+      <label className="text-gray-300 text-sm font-medium mb-1 block">{label}</label>
       <input
         type={type}
         className={`w-full bg-gray-900/50 border ${
           erro ? "border-red-500" : "border-gray-600"
-        } rounded-xl p-4 text-white text-lg placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition`}
+        } rounded-xl p-2.5 text-white text-sm placeholder-gray-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition`}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      {erro && <p className="text-red-400 text-sm mt-2">{erro}</p>}
+      {erro && <p className="text-red-400 text-xs mt-1">{erro}</p>}
     </div>
   );
 }
@@ -238,12 +235,14 @@ function Input({ label, value, onChange, placeholder, type = "text", erro }: any
 function Feature({ icon, title, text }: any) {
   return (
     <div className="flex items-start gap-5">
-      <div className="w-11 h-11 bg-orange-500/20 rounded-full flex items-center justify-center mt-1">
-        <span className="text-orange-500 text-2xl">{icon}</span>
+      <div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mt-1">
+        <span className="text-orange-500 text-4xl">{icon}</span>
       </div>
       <div>
         <h3 className="font-semibold text-2xl mb-2">{title}</h3>
-        <p className="text-gray-400 text-lg leading-relaxed">{text}</p>
+        <p className="text-gray-400 text-lg leading-relaxed max-w-md">
+          {text}
+        </p>
       </div>
     </div>
   );

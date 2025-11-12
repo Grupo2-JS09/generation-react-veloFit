@@ -1,10 +1,9 @@
 import { CheckCircle, XCircle } from "lucide-react";
 import type Servico from "../../models/Servico";
+import { Link } from "react-router-dom";
 
 interface CardsProps {
   recomendado?: boolean;
-  nome: string;
-  preco: string;
   precoAntigo?: string;
   descricaoPreco?: string;
   beneficios: { texto: string; disponivel: boolean }[];
@@ -14,11 +13,10 @@ interface CardsProps {
 
 function Cards({
   recomendado = false,
-  nome,
-  preco,
   precoAntigo,
   descricaoPreco,
   beneficios,
+  servico
 }: CardsProps) {
   return (
     <div
@@ -31,23 +29,26 @@ function Cards({
         </span>
       )}
 
-      {/* Título e preço */}
       <div>
         <h2 className="text-sm font-bold uppercase opacity-80">PLANO</h2>
-        <h1 className="text-2xl font-bold mb-2">{nome}</h1>
+        <h1 className="text-2xl font-bold mb-2">{servico.modalidade}</h1>
 
         {precoAntigo && (
           <p className="line-through text-sm opacity-70">
             de {precoAntigo} por
           </p>
         )}
-        <p className="text-4xl font-extrabold mt-1">{preco}</p>
+        <p className="text-4xl font-extrabold mt-1">
+          {servico.valor_mensalidade?.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </p>
         {descricaoPreco && (
           <p className="text-sm opacity-90 mt-1">{descricaoPreco}</p>
         )}
       </div>
 
-      {/* Benefícios */}
       <ul className="mt-6 space-y-2">
         {beneficios.map((b, i) => (
           <li
@@ -66,12 +67,13 @@ function Cards({
         ))}
       </ul>
 
-      {/* Botão */}
-      <button
-        className={`mt-6 w-full py-2 rounded-xl font-semibold  bg-(--tomato) text-white hover:bg-(--jet)`}
-      >
-        Matricule-se
-      </button>
+      <Link to="/servicos">
+        <button
+          className={`mt-6 w-full py-2 rounded-xl font-semibold  bg-(--tomato) text-white hover:bg-(--jet)`}
+        >
+          Matricule-se
+        </button>
+      </Link>
     </div>
   );
 }

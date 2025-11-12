@@ -1,94 +1,75 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useContext, useEffect, useState, type ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Categoria from "../../../models/Categoria";
 import type Servico from "../../../models/Servico";
+import type Usuario from "../../../models/Usuario";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function FormServico() {
   const navigate = useNavigate();
-
-  const modalidades = [
-    { modalidade: 'Boxe', mensalidade: 200 },
-    { modalidade: 'Muay Thai', mensalidade: 220 },
-    { modalidade: 'Jiu-Jitsu', mensalidade: 230 },
-    { modalidade: 'Karatê', mensalidade: 210 },
-    { modalidade: 'Yoga', mensalidade: 180 },
-    { modalidade: 'Pilates', mensalidade: 190 },
-    { modalidade: 'CrossFit', mensalidade: 300 },
-    { modalidade: 'Musculação', mensalidade: 150 },
-    { modalidade: 'Zumba', mensalidade: 170 },
-    { modalidade: 'Funcional', mensalidade: 200 },
-    { modalidade: 'Todos', mensalidade: 500 } 
-  ];
-  const [modalidadeSelecionada, setModalidadeSelecionada] = useState("");
-  const [mensalidade, setMensalidade] = useState<number>(0);
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
-
-  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-
-  const [servico, setServico] = useState<Servico>({} as Servico);
-
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
-
   const { id } = useParams<{ id: string }>();
 
-  function handleChange(e) {
-    const selected = e.target.value;
-    setModalidadeSelecionada(selected);
+  // Estados principais
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+  const [servico, setServico] = useState<Servico>({} as Servico);
 
-    const encontrada = modalidades.find(m => m.modalidade === selected);
-    if (encontrada) {
-      setMensalidade(encontrada.mensalidade);
-    } else {
-      setMensalidade(0);
-    }
-  }
+  // Novo: usuários disponíveis no sistema
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState<Usuario | null>(null);
 
-  async function buscarServicoPorId(id: string) {
-    try {
-      await buscar(`/servicos/${id}`, setServico, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
-    }
-  }
-
-  async function buscarCategoriaPorId(id: string) {
-    try {
-      await buscar(`/categorias/${id}`, setCategoria, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
-    }
-  }
-
+  // 🔹 Buscar todas as categorias
   async function buscarCategorias() {
     try {
       await buscar("/categorias", setCategorias, {
         headers: { Authorization: token },
       });
     } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
+      if (error.toString().includes("401")) handleLogout();
     }
   }
 
+  // 🔹 Buscar todos os usuários (apenas se o logado for admin)
+  async function buscarUsuarios() {
+    try {
+      await buscar("/usuarios/all", setUsuarios, {
+        headers: { Authorization: token },
+      });
+    } catch (error: any) {
+      if (error.toString().includes("401")) handleLogout();
+    }
+  }
+
+  // 🔹 Buscar serviço por ID (para edição)
+  async function buscarServicoPorId(id: string) {
+    try {
+      await buscar(`/servicos/${id}`, setServico, {
+        headers: { Authorization: token },
+      });
+    } catch (error: any) {
+      if (error.toString().includes("401")) handleLogout();
+    }
+  }
+
+  // 🔹 Buscar categoria específica
+  async function buscarCategoriaPorId(id: string) {
+    try {
+      await buscar(`/categorias/${id}`, setCategoria, {
+        headers: { Authorization: token },
+      });
+    } catch (error: any) {
+      if (error.toString().includes("401")) handleLogout();
+    }
+  }
+
+  // Proteção de rota
   useEffect(() => {
     if (token === "") {
       ToastAlerta("Você precisa estar logado", "info");
@@ -96,8 +77,10 @@ function FormServico() {
     }
   }, [token]);
 
+  // Carregar dados iniciais
   useEffect(() => {
     buscarCategorias();
+    buscarUsuarios(); // 👈 novo
 
     if (id !== undefined) {
       buscarServicoPorId(id);
@@ -116,7 +99,7 @@ function FormServico() {
       ...servico,
       [e.target.name]: e.target.value,
       categoria: categoria,
-      usuario: usuario,
+      usuario: usuarioSelecionado, 
     });
   }
 
@@ -124,49 +107,42 @@ function FormServico() {
     navigate("/servicos");
   }
 
+  // 🔹 Cadastrar ou atualizar serviço
   async function gerarNovoServico(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
 
-    const payload: Servico = {
-      ...servico,
-      modalidade: modalidadeSelecionada,
-      valor_mensalidade: mensalidade,
-      categoria: categoria,
-      usuario: usuario
+    // Se o admin não escolheu o usuário, bloqueia
+    if (!usuarioSelecionado) {
+      ToastAlerta("Selecione o usuário contratante", "info");
+      setIsLoading(false);
+      return;
     }
 
-    if (id !== undefined) {
-      try {
+    const payload: Servico = {
+      ...servico,
+      categoria: categoria,
+      usuario: usuarioSelecionado, // 👈 vinculamos o selecionado
+    };
+
+    try {
+      if (id !== undefined) {
         await atualizar(`/servicos`, payload, setServico, {
-          headers: {
-            Authorization: token,
-          },
+          headers: { Authorization: token },
         });
         ToastAlerta("Serviço atualizado com sucesso", "sucesso");
-      } catch (error: any) {
-        if (error.toString().includes("401")) {
-          handleLogout();
-          ToastAlerta('Faça login para continuar!', 'info')
-        } else {
-          ToastAlerta("Erro ao atualizar o Serviço", "erro");
-        }
-      }
-    } else {
-      try {
+      } else {
         await cadastrar(`/servicos`, payload, setServico, {
-          headers: {
-            Authorization: token,
-          },
+          headers: { Authorization: token },
         });
         ToastAlerta("Serviço cadastrado com sucesso", "sucesso");
-      } catch (error: any) {
-        if (error.toString().includes("401")) {
-          handleLogout();
-          ToastAlerta('Faça login para continuar!', 'info')
-        } else {
-          ToastAlerta("Erro ao cadastrar o Serviço", "erro");
-        }
+      }
+    } catch (error: any) {
+      if (error.toString().includes("401")) {
+        handleLogout();
+        ToastAlerta("Faça login para continuar!", "info");
+      } else {
+        ToastAlerta("Erro ao salvar o serviço", "erro");
       }
     }
 
@@ -178,88 +154,123 @@ function FormServico() {
 
   return (
     <div className="bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900 text-white flex flex-col items-center py-10 px-6">
-      <h1 className="flex flex-col items-center  text-3xl font-bold">
-        {id !== undefined ? "Editar Servico" : "Cadastrar Servico"}
+      <h1 className="text-3xl font-bold mb-6">
+        {id !== undefined ? "Editar Serviço" : "Cadastrar Serviço"}
       </h1>
 
-      <form className='bg-slate-800/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700'
-        onSubmit={gerarNovoServico}>
+      <form
+        className="bg-slate-800/60 rounded-2xl mb-15 shadow-lg p-8 w-full max-w-md flex flex-col gap-6 border border-slate-700"
+        onSubmit={gerarNovoServico}
+      >
+        {/* Usuário contratante */}
         <div className="flex flex-col gap-2">
-          <label htmlFor="modalidade"  className='block mb-2 text-sm font-semibold'>Modalidade do Servico</label>
+          <label className="block mb-2 text-sm font-semibold">
+            Usuário contratante
+          </label>
           <select
             required
-            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={modalidadeSelecionada}
-            onChange={handleChange}
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            onChange={(e) => {
+              const usuarioSelecionado = usuarios.find(
+                (u) => u.id === Number(e.target.value)
+              );
+              setUsuarioSelecionado(usuarioSelecionado || null);
+            }}
           >
-            <option value="">Selecione...</option>
-        {modalidades.map((m, index) => (
-          <option key={index} value={m.modalidade}>
-            {m.modalidade}
-          </option>
-        ))}
+            <option value="">Selecione o usuário...</option>
+            {usuarios.map((u) => (
+              <option key={u.id} value={u.id}>
+                {u.nome} ({u.usuario})
+              </option>
+            ))}
           </select>
         </div>
 
+        {/* Modalidade */}
         <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="valor_mensalidade" className='flex mb-2 text-sm font-semibold'>Valor da Mensalidade</label>
+          <label className="text-sm font-semibold">Modalidade</label>
           <input
-            type="number"
-            readOnly
-            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={mensalidade}
+            type="text"
+            name="modalidade"
+            required
+            placeholder="Ex: Jiu-Jitsu, Crossfit..."
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value={servico.modalidade || ""}
+            onChange={atualizarEstado}
           />
         </div>
-          <label htmlFor="frequencia" className='flex mb-2 text-sm font-semibold'>Frequência</label>
+
+        {/* Frequência */}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold">Frequência</label>
           <input
             type="number"
             placeholder="Frequência por semana..."
             name="frequencia"
             required
-            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={servico.frequencia}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value={servico.frequencia || ""}
+            onChange={atualizarEstado}
           />
         </div>
-        
 
-        
+        {/* Valor do serviço */}
+
         <div className="flex flex-col gap-2">
-          <label htmlFor="data" className='flex mb-2 text-sm font-semibold'>Data da Matrícula</label>
+          <label className="text-sm font-semibold">Valor</label>
           <input
-            type="date" 
+            type="number"
+            placeholder="Valor do serviço"
+            name="valor_mensalidade"
+            required
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value={servico.valor_mensalidade || ""}
+            onChange={atualizarEstado}
+          />
+        </div>
+
+        {/* Data de matrícula */}
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold">Data da Matrícula</label>
+          <input
+            type="date"
             name="dt_matricula"
-            className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
-            value={servico.dt_matricula}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+            className="w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400"
+            value={
+              servico.dt_matricula
+                ? new Date(servico.dt_matricula).toISOString().split("T")[0]
+                : ""
+            }
+            onChange={atualizarEstado}
           />
         </div>
 
         
+
+        {/* Categoria */}
         <div className="flex flex-col gap-2">
-          <p>Categoria do Servico</p>
+          <label className="text-sm font-semibold">Categoria</label>
           <select
             name="categoria"
-            id="categoria"
-            className="border p-2 border-slate-800 rounded"
+            className="border p-3 border-slate-800 rounded bg-slate-900 focus:ring-2 focus:ring-orange-400"
             onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
           >
             <option value="" selected disabled>
               Selecione uma Categoria
             </option>
-
             {categorias.map((categoria) => (
-              <>
-                <option value={categoria.id}>{categoria.nome_categoria}</option>
-              </>
+              <option key={categoria.id} value={categoria.id}>
+                {categoria.nome_categoria}
+              </option>
             ))}
           </select>
         </div>
+
+        {/* Botão */}
         <button
           type="submit"
-          className='mt-4 w-full px-6 py-3 rounded-lg bg-(--celadon) hover:bg-(--ferngreen) transition font-semibold text-white text-lg shadow-md'
-          disabled={carregandoCategoria}
+          className="mt-4 w-full px-6 py-3 rounded-lg bg-[var(--celadon)] hover:bg-[var(--ferngreen)] transition font-semibold text-black text-lg shadow-md"
+          disabled={carregandoCategoria || isLoading}
         >
           {isLoading ? (
             <ClipLoader color="#ffffff" size={24} />
@@ -271,4 +282,5 @@ function FormServico() {
     </div>
   );
 }
+
 export default FormServico;
