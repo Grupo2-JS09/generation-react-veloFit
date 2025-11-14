@@ -1,146 +1,194 @@
-VeloFit - Plataforma de Serviços Fitness
-
-<div align="center">
-<img src="https://i.imgur.com/2s90F7q.png" alt="Logo VeloFit" width="200"/>
-</div>
-
-🚀 Visão Geral do Projeto
-
-O VeloFit é uma plataforma web moderna e responsiva, desenvolvida para conectar usuários a uma variedade de serviços e categorias do universo fitness. O projeto foi concebido com o objetivo de oferecer uma experiência de usuário fluida e intuitiva, facilitando a busca, visualização e gerenciamento de serviços relacionados a atividades físicas, saúde e bem-estar.
-
-A aplicação é um SPA (Single Page Application ) construída com React e TypeScript, garantindo alta performance, escalabilidade e um código mais robusto e livre de erros.
-
-💻 Aspectos Técnicos e Tecnologias
-
-O projeto VeloFit é uma aplicação full-stack com foco no front-end, utilizando um conjunto de tecnologias modernas e eficientes para a construção da interface e a comunicação com o back-end (simulado ou externo).
-
-🛠️ Tecnologias Utilizadas
-
-Categoria
-Tecnologia
-Descrição
-Framework Front-end
-React (com Hooks)
-Biblioteca JavaScript para construção de interfaces de usuário reativas e baseadas em componentes.
-Linguagem
-TypeScript
-Superset do JavaScript que adiciona tipagem estática, melhorando a manutenibilidade e a detecção de erros em tempo de desenvolvimento.
-Build Tool
-Vite
-Ferramenta de build e bundler de última geração, otimizando o desenvolvimento e a performance da aplicação.
-Estilização
-Tailwind CSS
-Framework CSS utility-first para construção rápida de designs customizados e responsivos.
-Roteamento
-React Router DOM v6
-Gerenciamento de rotas e navegação entre as diferentes páginas da aplicação.
-Requisições HTTP
-Axios
-Cliente HTTP baseado em Promises para realizar requisições à API back-end.
-Ícones
-Phosphor Icons e Lucide React
-Bibliotecas de ícones vetoriais para enriquecer a interface.
-Componentes UI
-Swiper
-Biblioteca para criação de carrosséis e sliders responsivos.
-Notificações
-React Toastify
-Biblioteca para exibir notificações e alertas de forma elegante e não-bloqueante.
+# Documentação Completa do Projeto VeloFit
+![Logo VeloFit](https://imgur.com/H6qOppX.png)
 
 
-🧩 Estrutura e Lógica do Projeto
+## 1. Introdução
 
-A arquitetura do VeloFit segue o padrão de componentes do React, organizada de forma modular para facilitar o desenvolvimento e a manutenção:
+O projeto **VeloFit** é uma aplicação *front-end* desenvolvida em **React** com **TypeScript** e **Vite**, que simula um sistema de gerenciamento de serviços e categorias para uma academia ou centro de bem-estar. A aplicação é construída com uma arquitetura moderna, utilizando **Tailwind CSS** para estilização e **Axios** para comunicação com um *back-end* externo.
 
-1.
-Componentes (src/components):
+O objetivo desta documentação é fornecer uma visão geral da arquitetura, das funcionalidades implementadas, das tecnologias utilizadas e das instruções para a configuração e execução do projeto.
 
-•
-Reutilização: Contém componentes de interface menores e reutilizáveis (e.g., Navbar, Footer, Cards).
+## 2. Tecnologias Utilizadas
 
-•
-Módulos Específicos: Estrutura modular para as principais funcionalidades, como categoria e servico, cada uma com seus próprios componentes de listagem, formulário e exclusão.
+O VeloFit é um projeto *full-stack* *front-end* que se integra a um *back-end* externo. As principais tecnologias e bibliotecas utilizadas no *front-end* são:
+
+| Categoria | Tecnologia/Biblioteca | Descrição |
+| :--- | :--- | :--- |
+| **Framework** | React (v19.2.0) | Biblioteca JavaScript para construção de interfaces de usuário. |
+| **Linguagem** | TypeScript (v5.9.3) | Superset do JavaScript que adiciona tipagem estática. |
+| **Build Tool** | Vite (v7.2.2) | Ferramenta de *build* rápida para projetos web modernos. |
+| **Estilização** | Tailwind CSS (v4.1.17) | Framework CSS *utility-first* para construção rápida de designs. |
+| **Roteamento** | React Router DOM (v7.9.5) | Gerenciamento de rotas e navegação na aplicação. |
+| **Comunicação API** | Axios (v1.13.2) | Cliente HTTP baseado em *Promises* para fazer requisições ao *back-end*. |
+| **Estado Global** | React Context API | Gerenciamento do estado de autenticação do usuário. |
+| **Notificações** | React Toastify (v11.0.5) | Exibição de mensagens de alerta e notificação (*toasts*). |
+| **Ícones** | Phosphor Icons (v2.1.10) | Biblioteca de ícones vetoriais. |
+
+## 3. Arquitetura e Estrutura de Pastas
+
+O projeto segue uma estrutura de pastas modular e organizada, típica de aplicações React/Vite:
+
+```
+generation-react-veloFit/
+├── src/
+│   ├── assets/             # Arquivos estáticos como imagens e ícones
+│   ├── components/         # Componentes reutilizáveis da interface
+│   │   ├── categoria/      # Componentes relacionados à Categoria (CRUD)
+│   │   ├── servico/        # Componentes relacionados ao Serviço (CRUD)
+│   │   ├── footer/
+│   │   ├── navbar/
+│   │   └── utils/          # Funções utilitárias (ex: ToastAlerta)
+│   ├── contexts/           # Contextos globais (ex: AuthContext)
+│   ├── models/             # Definições de tipos TypeScript para os dados
+│   ├── pages/              # Páginas principais da aplicação (rotas)
+│   ├── services/           # Módulo de comunicação com a API (Service.ts)
+│   ├── App.tsx             # Componente principal e configuração de rotas
+│   └── main.tsx            # Ponto de entrada da aplicação
+├── public/                 # Arquivos públicos (ex: index.html)
+├── package.json            # Metadados e dependências do projeto
+└── ...
+```
+
+## 4. Funcionalidades e Rotas
+
+A aplicação VeloFit implementa as seguintes funcionalidades principais, acessíveis através das rotas configuradas no `App.tsx`:
+
+### 4.1. Autenticação e Usuário
+
+| Rota | Componente | Funcionalidade |
+| :--- | :--- | :--- |
+| `/` ou `/login` | `Login` | Permite que o usuário faça login na aplicação. |
+| `/cadastro` | `Cadastro` | Permite que novos usuários se cadastrem. |
+| `/perfil` | `Perfil` | Exibe informações do perfil do usuário logado. |
+
+O gerenciamento de estado de autenticação é feito pelo `AuthContext.tsx`, que armazena o token e os dados do usuário.
+
+### 4.2. Gerenciamento de Categorias (CRUD)
+
+| Rota | Componente | Funcionalidade |
+| :--- | :--- | :--- |
+| `/categorias` | `ListaCategoria` | Exibe todas as categorias cadastradas. |
+| `/cadastrarcategoria` | `FormCategoria` | Formulário para cadastrar uma nova categoria. |
+| `/editarcategoria/:id` | `FormCategoria` | Formulário para editar uma categoria existente. |
+| `/deletarcategoria/:id` | `DeletarCategoria` | Confirmação e exclusão de uma categoria. |
+
+### 4.3. Gerenciamento de Serviços (CRUD)
+
+| Rota | Componente | Funcionalidade |
+| :--- | :--- | :--- |
+| `/servicos` | `ListaServico` | Exibe todos os serviços cadastrados. |
+| `/cadastrarservico` | `FormServico` | Formulário para cadastrar um novo serviço. |
+| `/editarservico/:id` | `FormServico` | Formulário para editar um serviço existente. |
+| `/deletarservico/:id` | `DeletarServico` | Confirmação e exclusão de um serviço. |
+
+### 4.4. Páginas Informativas
+
+| Rota | Componente | Funcionalidade |
+| :--- | :--- | :--- |
+| `/home` | `Home` | Página inicial da aplicação. |
+| `/sobre` | `About` | Página com informações sobre o projeto/empresa. |
+| `/contato` | `Contato` | Página de contato. |
+
+## 5. Modelagem de Dados (TypeScript)
+
+Os principais modelos de dados da aplicação, definidos em `src/models/`, são:
+
+### 5.1. `Usuario` e `UsuarioLogin`
+
+Representam a estrutura de dados do usuário e os dados necessários para o login.
+
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | `number` | Identificador único do usuário. |
+| `nome` | `string` | Nome completo do usuário. |
+| `usuario` | `string` | E-mail ou nome de usuário. |
+| `senha` | `string` | Senha do usuário. |
+| `foto` | `string` | URL da foto de perfil. |
+| `token` | `string` | Token de autenticação (apenas em `UsuarioLogin`). |
+| `servico` | `Servico[]` | Lista de serviços associados ao usuário (opcional). |
+
+### 5.2. `Categoria`
+
+Representa uma categoria de serviço (ex: "Musculação", "Pilates").
+
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | `number` | Identificador único da categoria. |
+| `nome_categoria` | `string` | Nome da categoria. |
+| `servico` | `Servico[]` | Lista de serviços pertencentes a esta categoria. |
+
+### 5.3. `Servico`
+
+Representa um serviço ou matrícula.
+
+| Campo | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `id` | `number` | Identificador único do serviço. |
+| `valor_mensalidade` | `number` | Valor da mensalidade. |
+| `frequencia` | `number` | Frequência de uso/aulas. |
+| `dt_matricula` | `Date` | Data da matrícula. |
+| `modalidade` | `string` | Nome da modalidade (ex: "Plano Mensal"). |
+| `usuario` | `Usuario` | Usuário associado a este serviço. |
+| `categoria` | `Categoria` | Categoria do serviço. |
+
+## 6. Comunicação com o Back-end
+
+A comunicação com o *back-end* é centralizada no módulo `src/services/Service.ts`, que utiliza a biblioteca **Axios**.
+
+### 6.1. URL Base da API
+
+Todas as requisições são direcionadas para a seguinte URL base:
+
+> `https://generation-velofit-1.onrender.com`
+
+### 6.2. Funções de Serviço
+
+O módulo `Service.ts` exporta as seguintes funções para interação com a API:
+
+| Função | Método HTTP | Endpoint de Exemplo | Descrição |
+| :--- | :--- | :--- | :--- |
+| `cadastrarUsuario` | `POST` | `/usuarios/cadastrar` | Cadastra um novo usuário. |
+| `login` | `POST` | `/usuarios/logar` | Realiza o login e retorna o token. |
+| `buscar` | `GET` | `/categorias` | Busca dados (requer token no `header`). |
+| `cadastrar` | `POST` | `/servicos` | Cadastra um novo recurso (requer token). |
+| `atualizar` | `PUT` | `/servicos/1` | Atualiza um recurso existente (requer token). |
+| `deletar` | `DELETE` | `/categorias/1` | Deleta um recurso (requer token). |
+| `CalcularMensalidade` | `GET` | `/servicos/mensalidade` | Função específica para cálculo de mensalidade. |
+
+## 7. Configuração e Execução Local
+
+Para configurar e executar o projeto localmente, siga os passos abaixo:
+
+### 7.1. Pré-requisitos
+
+Certifique-se de ter o **Node.js** e o **npm** (ou **pnpm**) instalados em sua máquina.
+
+### 7.2. Instalação de Dependências
+
+1.  Navegue até o diretório do projeto:
+    ```bash
+    cd generation-react-veloFit
+    ```
+2.  Instale as dependências:
+    ```bash
+    npm install
+    # ou pnpm install
+    ```
+
+### 7.3. Execução do Projeto
+
+Execute o comando de desenvolvimento para iniciar a aplicação:
+
+```bash
+npm run dev
+# ou pnpm run dev
+```
+
+O projeto será iniciado em modo de desenvolvimento, geralmente acessível em `http://localhost:5173`.
 
 
+## 8. Referências
 
-2.
-Páginas (src/pages):
+A documentação foi elaborada com base na análise do código-fonte do repositório `Grupo2-JS09/generation-react-veloFit` [1].
 
-•
-Define as rotas principais da aplicação (e.g., Home, Login, Cadastro, Perfil, About).
-
-
-
-3.
-Contextos (src/contexts):
-
-•
-AuthContext.tsx: Implementa a lógica de Autenticação Global da aplicação. Gerencia o estado de login do usuário, armazena o token de acesso e as informações do usuário, e provê funções para login e logout.
-
-
-
-4.
-Modelos (src/models):
-
-•
-Define as interfaces TypeScript para as entidades do sistema (Categoria, Servico, Usuario, UsuarioLogin), garantindo a integridade e a tipagem dos dados.
-
-
-
-5.
-Serviços (src/services):
-
-•
-Service.ts: Centraliza a lógica de comunicação com o back-end (API). Utiliza o Axios para encapsular as requisições HTTP (GET, POST, PUT, DELETE), facilitando a manutenção e a troca de URLs base.
-
-
-
-🔑 Lógica de Autenticação
-
-A aplicação utiliza um sistema de autenticação baseado em Token (JWT), gerenciado pelo AuthContext:
-
-•
-Login: Ao realizar o login, a aplicação envia as credenciais para o back-end e recebe um token de autenticação.
-
-•
-Persistência: O token é armazenado no contexto e, geralmente, em um mecanismo de armazenamento persistente (como localStorage ou sessionStorage) para manter o usuário logado entre as sessões.
-
-•
-Autorização: Todas as requisições que exigem autenticação (e.g., criar, editar ou deletar serviços/categorias) incluem o token no cabeçalho Authorization (Bearer Token), garantindo que apenas usuários autenticados possam acessar recursos protegidos.
-
-👥 Equipe de Desenvolvimento
-
-## 👥 Equipe do Projeto
-
-Projeto desenvolvido com dedicação pela equipe:
-
-| **Nome**            | **Função**                          | **LinkedIn** |
-|---------------------|--------------------------------------|--------------|
-| Elzilane Barreto    | Desenvolvedora – Módulo Categoria    | [elzilanebarreto](https://www.linkedin.com/in/elzilanebarreto) |
-| Benner Dias         | Desenvolvedor – Tester               | [BennerDias](https://www.linkedin.com/in/BennerDias) |
-| Anna Clara          | Desenvolvedora – Módulo Serviços     | [andradeannac](https://www.linkedin.com/in/andradeannac) |
-| Paulo Henrique      | Documentação                         | [paulo-henrique-belarmino-ads](https://www.linkedin.com/in/paulo-henrique-belarmino-ads) |
-| Mateus Heloi        | Desenvolvedor – Módulo Usuário       | [mateus-heloi](https://www.linkedin.com/in/mateus-heloi) |
-| Maristela Rocha     | Desenvolvedora Segurança – Designer  | [maristela-rocha](https://www.linkedin.com/in/maristela-rocha) |
-| Vinicius Valverde   | Engenheiro de Infraestrutura         | [vinicius-valverde](https://www.linkedin.com/in/vinicius-valverde) |
-
-
-📧 Contato
-
-Email: grupo_02-turma-javascript_09@outlook.com
-
-📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-
-
-
-<div align="center">
-
-⭐ Se este projeto te ajudou, não esqueça de dar uma estrela!
-
-Desenvolvido com 💪 pelo Time VeloGroup
-
-</div>
-
+[1] Grupo2-JS09/generation-react-veloFit: Repositório GitHub do projeto VeloFit. (https://github.com/Grupo2-JS09/generation-react-veloFit)
