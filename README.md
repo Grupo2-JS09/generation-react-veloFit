@@ -110,32 +110,19 @@ Autorização: Todas as requisições que exigem autenticação (e.g., criar, ed
 
 👥 Equipe de Desenvolvimento
 
-Este projeto foi desenvolvido com dedicação e colaboração pelos seguintes membros:
+## 👥 Equipe do Projeto
 
-Nome
-Função
-LinkedIn
-Elzilane Barreto
-Desenvolvedora - Módulo Categoria
-/in/elzilanebarreto
-Benner Dias
-Desenvolvedor - Tester
-/in/BennerDias
-Anna Clara
-Desenvolvedora - Módulo Serviços
-/in/andradeannac
-Paulo Henrique
-Documentação
-/in/paulo-henrique-belarmino-ads
-Mateus Heloi
-Desenvolvedor - Módulo Usuário
-/in/mateus-heloi
-Maristela Rocha
-Desenvolvedora Segurança - Designer
-/in/maristela-rocha
-Vinicius Valverde
-Engenheiro de Infraestrutura
-/in/vinicius-valverde
+Projeto desenvolvido com dedicação pela equipe:
+
+| **Nome**            | **Função**                          | **LinkedIn** |
+|---------------------|--------------------------------------|--------------|
+| Elzilane Barreto    | Desenvolvedora – Módulo Categoria    | [elzilanebarreto](https://www.linkedin.com/in/elzilanebarreto) |
+| Benner Dias         | Desenvolvedor – Tester               | [BennerDias](https://www.linkedin.com/in/BennerDias) |
+| Anna Clara          | Desenvolvedora – Módulo Serviços     | [andradeannac](https://www.linkedin.com/in/andradeannac) |
+| Paulo Henrique      | Documentação                         | [paulo-henrique-belarmino-ads](https://www.linkedin.com/in/paulo-henrique-belarmino-ads) |
+| Mateus Heloi        | Desenvolvedor – Módulo Usuário       | [mateus-heloi](https://www.linkedin.com/in/mateus-heloi) |
+| Maristela Rocha     | Desenvolvedora Segurança – Designer  | [maristela-rocha](https://www.linkedin.com/in/maristela-rocha) |
+| Vinicius Valverde   | Engenheiro de Infraestrutura         | [vinicius-valverde](https://www.linkedin.com/in/vinicius-valverde) |
 
 
 📧 Contato
