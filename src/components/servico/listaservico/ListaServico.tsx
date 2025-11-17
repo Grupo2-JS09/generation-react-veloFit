@@ -61,16 +61,17 @@ function ListaServicos() {
           </span>
         )}
 
-        <div className="flex justify-end w-full max-w-6xl mb-10">
+        
+
+        <div className="grid justify-center w-full mb-10">
+          <div className="flex justify-end min-w-screen max-w-6xl mb-10 ">
           <Link to="/cadastrarservico">
-            <button className="px-6 py-2 rounded-lg bg-orange-500 hover:bg-orange-900 transition font-semibold text-sm text-white shadow-md">
+            <button className="px-6 py-2 rounded-lg bg-orange-500 hover:bg-orange-900 transition font-semibold text-sm text-white shadow-md mr-14 xl:mr-18">
               Cadastrar Novo Serviço
             </button>
           </Link>
         </div>
-
-        <div className="flex justify-center w-full mb-10">
-          <div className="grid place-items-center gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid place-items-center gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mx-10">
             {servicos.map((servico) => (
               <CardServicos key={servico.id} servico={servico} />
             ))}

@@ -10,34 +10,33 @@ export default function Home() {
   return (
     <>
       <div className=" w-full flex flex-col items-center justify-center gap-10 sm:flex-col md:flex-row md:items-stretch overflow-hidden min-h-screen bg-[url('https://64.media.tumblr.com/tumblr_m1me4nvOwe1rsbhe4o1_500.gif')] bg-cover bg-center bg-no-repeat  ">
-        <div className="flex flex-col w-full md:w-1/2 justify-center items-center  ">
-          <div className="w-1/2 flex flex-col gap-5 py-5">
-            <div className="flex flex-col gap-6">
-              <h1 className="text-3xl text-white font-bold sm:text-6xl ">
+        <div className='flex flex-col w-full md:w-1/2 justify-center items-center  '>
+          <div className='w-1/2 flex flex-col gap-5 py-5'>
+            <div className='flex flex-col gap-6'>
+              <h1 className='text-3xl text-white font-bold sm:text-6xl '>
                 Transforme Seu Corpo Com a{" "}
-                <span className="text-(--tomato)">VeloFIT</span>
+                <span className='text-(--tomato)'>VeloFIT</span>
               </h1>
-              <p className="text-white ">
+              <p className='text-white '>
                 Sistema completo de gestão para academias. Cadastre serviços,
                 gerencie membros e impulsione seu negócio fitness
               </p>
             </div>
-            <div className="flex gap-4">
-              <a href="#cards" className="smooth">
-                <button className="cad-button px-6 py-2 bg-(--tomato) text-white border-2 border-[#f06543] rounded font-semibold hover:bg-[#e05738] hover:border-[#e05738] hover:scale-105 transition-all duration-300">
+            <div className='flex gap-4'>
+              <a href='#cards' className='smooth'>
+                <button className='cad-button px-6 py-2 bg-(--tomato) text-white border-2 border-[#f06543] rounded font-semibold hover:bg-[#e05738] hover:border-[#e05738] hover:scale-105 transition-all duration-300'>
                   Saiba Mais
                 </button>
               </a>
-              
             </div>
           </div>
         </div>
-        <div className=" flex  w-full  items-center p-4 md:w-1/2">
+        <div className=' flex  w-full  items-center p-4 py-10 px-6'>
           <MyCaroussel items={images} />
         </div>
       </div>
 
-      <section id="cards">
+      <section id='cards'>
         <ListaCards />
       </section>
     </>
