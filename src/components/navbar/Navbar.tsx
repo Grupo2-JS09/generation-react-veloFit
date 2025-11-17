@@ -16,7 +16,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    function handleClickFora(event) {
+    function handleClickFora(event: any) {
       const target = event.target;
       if (!target.closest(".menu-foto") && !target.closest(".mobile-menu") && !target.closest(".hamburger-btn")) {
         setMenuAberto(false);
