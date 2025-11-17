@@ -9,8 +9,8 @@ export default function Home() {
 
   return (
     <>
-      <div className=" w-full flex flex-col items-center justify-center gap-10 sm:flex-col md:flex-row md:items-stretch overflow-hidden min-h-screen bg-[url('https://64.media.tumblr.com/tumblr_m1me4nvOwe1rsbhe4o1_500.gif')] bg-cover bg-center bg-no-repeat  ">
-        <div className='flex flex-col w-full md:w-1/2 justify-center items-center  '>
+      <div className=" w-full flex flex-col items-center justify-around gap-10 sm:flex-col md:flex-row md:items-stretch overflow-hidden min-h-screen bg-[url('https://i.pinimg.com/originals/b9/e8/e7/b9e8e7ff9f626caad4a62712a4fd2a4e.gif')] bg-cover bg-center bg-no-repeat  ">
+        <div className='flex flex-col w-full lg:w-1/2 md:w-1/2 justify-center items-center'>
           <div className='w-1/2 flex flex-col gap-5 py-5'>
             <div className='flex flex-col gap-6'>
               <h1 className='text-3xl text-white font-bold sm:text-6xl '>
@@ -19,7 +19,7 @@ export default function Home() {
               </h1>
               <p className='text-white '>
                 Sistema completo de gestão para academias. Cadastre serviços,
-                gerencie membros e impulsione seu negócio fitness
+                gerencie membros e impulsione seu negócio fitness.
               </p>
             </div>
             <div className='flex gap-4'>
@@ -31,7 +31,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className=' flex  w-full  items-center p-4 py-10 px-6'>
+        <div className='flex w-full lg:w-1/2 items-center p-4 py-10 px-6'>
           <MyCaroussel items={images} />
         </div>
       </div>

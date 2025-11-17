@@ -39,7 +39,7 @@ export default function Navbar() {
               <img src="https://i.imgur.com/H6qOppX.png" alt="VeloFit" className="w-8 h-8" />
             </Link>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:block ">
             <ul className="flex gap-10 list-none m-0 p-0">
               <li>
                 <Link to="/categorias" className="text-white text-base font-medium hover:text-[var(--celadon)] transition-colors duration-300 relative group">
