@@ -48,7 +48,7 @@ function ListaServicos() {
     <div className="relative min-h-screen text-white overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center filter grayscale"></div>
 
-      <div className="relative z-10 flex flex-col items-center pt-10">
+      <div className="relative z-10 flex flex-col items-center justify-center pt-10">
         {isLoading && (
           <div className="flex justify-center w-full my-8">
             <SyncLoader color="#9ae19d" size={32} />
@@ -71,7 +71,7 @@ function ListaServicos() {
             </button>
           </Link>
         </div>
-          <div className="grid place-items-center gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mx-10">
+          <div className="grid w-3/4 justify-center place-items-center gap-10 grid-cols-1 lg:grid-cols-2  xl:grid-cols-4  mx-auto">
             {servicos.map((servico) => (
               <CardServicos key={servico.id} servico={servico} />
             ))}
