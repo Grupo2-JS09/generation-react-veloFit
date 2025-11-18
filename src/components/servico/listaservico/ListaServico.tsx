@@ -71,7 +71,7 @@ function ListaServicos() {
             </button>
           </Link>
         </div>
-          <div className="grid w-3/4 justify-center place-items-center gap-10 grid-cols-1 lg:grid-cols-2  xl:grid-cols-4  mx-auto">
+          <div className="grid w-full max-w-7xl justify-center place-items-center gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4  mx-auto ">
             {servicos.map((servico) => (
               <CardServicos key={servico.id} servico={servico} />
             ))}
