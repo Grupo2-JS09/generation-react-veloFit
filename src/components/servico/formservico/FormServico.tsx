@@ -147,7 +147,7 @@ function FormServico() {
     <>
       <div className="bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center fixed inset-0 filter grayscale -z-10"></div>
 
-      <div className='relative flex flex-col min-h-screen text-white items-center mt-5'>
+      <div className='relative flex flex-col min-h-screen text-white items-center my-5'>
         <h1 className='text-4xl font-bold mb-5 text-(--tomato)'>
           {id !== undefined ? "Editar Serviço" : "Cadastrar Serviço"}
         </h1>
