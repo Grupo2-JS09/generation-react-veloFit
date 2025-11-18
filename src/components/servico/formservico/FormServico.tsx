@@ -145,15 +145,15 @@ function FormServico() {
 
   return (
     <>
-      <div className="bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center absolute inset-0 filter grayscale min-h-screen "></div>
+      <div className="bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center fixed inset-0 filter grayscale -z-10"></div>
 
-      <div className='relative flex flex-col h-screen text-white items-center justify-center '>
-        <h1 className='text-4xl font-bold mb-6 text-(--tomato)'>
+      <div className='relative flex flex-col min-h-screen text-white items-center mt-5'>
+        <h1 className='text-4xl font-bold mb-5 text-(--tomato)'>
           {id !== undefined ? "Editar Serviço" : "Cadastrar Serviço"}
         </h1>
 
         <form
-          className='bg-slate-800/60 rounded-2xl shadow-lg p-8 w-full max-w-md flex flex-col mt-5 gap-6 border border-slate-700'
+          className='bg-(--jet) rounded-2xl p-8 w-full max-w-md flex flex-col gap-6 shadow-[0_0_20px_rgba(0,0,0,0.8)]'
           onSubmit={gerarNovoServico}
         >
           <div className='flex flex-col gap-2'>
@@ -162,7 +162,7 @@ function FormServico() {
             </label>
             <select
               required
-              className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+              className='w-full p-3 rounded-lg bg-black border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
               onChange={(e) => {
                 const usuarioSelecionado = usuarios.find(
                   (u) => u.id === Number(e.target.value)
@@ -186,7 +186,7 @@ function FormServico() {
               name='modalidade'
               required
               placeholder='Ex: Jiu-Jitsu, Crossfit...'
-              className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+              className='w-full p-3 rounded-lg bg-black border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
               value={servico.modalidade || ""}
               onChange={atualizarEstado}
             />
@@ -199,7 +199,7 @@ function FormServico() {
               placeholder='Frequência por semana...'
               name='frequencia'
               required
-              className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+              className='w-full p-3 rounded-lg bg-black border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
               value={servico.frequencia || ""}
               onChange={atualizarEstado}
             />
@@ -212,7 +212,7 @@ function FormServico() {
               placeholder='Valor do serviço'
               name='valor_mensalidade'
               required
-              className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+              className='w-full p-3 rounded-lg bg-black border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
               value={servico.valor_mensalidade || ""}
               onChange={atualizarEstado}
             />
@@ -223,7 +223,7 @@ function FormServico() {
             <input
               type='date'
               name='dt_matricula'
-              className='w-full p-3 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
+              className='w-full p-3 rounded-lg bg-black border border-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-400'
               value={
                 servico.dt_matricula
                   ? new Date(servico.dt_matricula).toISOString().split("T")[0]
@@ -237,7 +237,7 @@ function FormServico() {
             <label className='text-sm font-semibold'>Categoria</label>
             <select
               name='categoria'
-              className='border p-3 border-slate-800 rounded bg-slate-900 focus:ring-2 focus:ring-orange-400'
+              className='border p-3 border-slate-800 rounded bg-black focus:ring-2 focus:ring-orange-400'
               onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
             >
               <option value='' selected disabled>
@@ -253,7 +253,7 @@ function FormServico() {
 
           <button
             type='submit'
-            className='mt-4 w-full px-6 py-3 rounded-lg bg-[var(--celadon)] hover:bg-[var(--ferngreen)] transition font-semibold text-black text-lg shadow-md'
+            className='w-full py-3 rounded-lg font-semibold text-white bg-(--tomato) hover:bg-orange-600 transition flex justify-center items-center gap-2'
             disabled={carregandoCategoria || isLoading}
           >
             {isLoading ? (
